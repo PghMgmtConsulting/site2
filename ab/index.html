@@ -1,0 +1,279 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta name="generator" content="Primo" />
+      <!-- HEAD_svelte-dv8t5k_START --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="UTF-8"><link rel="icon" type="image/png" sizes="32x32" href="https://jbbjtodsvhsgjappwopg.supabase.co/storage/v1/object/public/sites/prisaka/assets/logoipsum-277.svg"><link rel="preconnect" href="https://fonts.bunny.net"><style>/* Reset & standardize default styles */
+@import url("https://unpkg.com/@primo-app/primo@1.3.64/reset.css") layer;
+
+/* Design tokens (apply to components) */
+:root {
+  /* Custom theme options */
+  --color-accent: #004700;
+
+  /* Base values */
+  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+  --border-radius: 0;
+  --border-color: #e0e1e1;
+}
+
+/* Root element (use instead of `body`) */
+#page {
+  font-family: system-ui, sans-serif;
+  color: #111;
+  line-height: 1.5;
+  font-size: 1.125rem;
+  background: white;
+}
+
+/* Elements */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+a.link {
+  line-height: 1.3;
+
+  border-bottom: 2px solid var(--color-accent);
+  transform: translateY(-2px); /* move link back into place */
+  transition: var(--transition, 0.1s border);
+}
+
+a.link:hover {
+    border-color: transparent;
+  }
+
+.heading {
+  font-size: 2.5rem;
+  line-height: 1.15;
+
+}
+
+.button {
+  color: white;
+  background: var(--color-accent, rebeccapurple);
+  border-radius: 0;
+  padding: 18px 24px;
+  transition: var(--transition, 0.1s box-shadow);
+  border: 0;
+}
+
+/* reset */
+
+.button:hover {
+    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);
+  }
+
+.button.inverted {
+    background: transparent;
+    color: var(--color-accent, rebeccapurple);
+  }
+
+/* Content Section */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+.content img {
+    width: 100%;
+    margin: 2rem 0;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+  }
+.content a.link {
+    line-height: 1.3;
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-accent);
+    transform: translateY(-2px); /* move link back into place */
+    transition: var(--transition, 0.1s border);
+  }
+.content a.link:hover {
+      border-color: transparent;
+    }
+.content h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+.content h2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content ul {
+    list-style: disc;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content ol {
+    list-style: decimal;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content blockquote {
+    padding: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--color-accent);
+  }
+</style><!-- HEAD_svelte-dv8t5k_END -->
+      <style>.section-container.svelte-1tnxlmj.svelte-1tnxlmj{display:flex;justify-content:space-between;align-items:center;padding-block:2rem}.logo.svelte-1tnxlmj.svelte-1tnxlmj{font-size:1.5rem;font-weight:600;line-height:1.2;max-width:400px}.desktop-nav.svelte-1tnxlmj.svelte-1tnxlmj{display:none;align-items:center;justify-content:space-between;width:100%}.desktop-nav.svelte-1tnxlmj nav.svelte-1tnxlmj{display:flex;gap:2rem}.desktop-nav.svelte-1tnxlmj nav a.link.svelte-1tnxlmj{border-color:transparent;transition:border-color 0.1s;font-size:0.95rem}.desktop-nav.svelte-1tnxlmj nav a.link.svelte-1tnxlmj:hover,.desktop-nav.svelte-1tnxlmj nav a.link .active.svelte-1tnxlmj{border-color:initial}@media(min-width: 800px){.desktop-nav.svelte-1tnxlmj.svelte-1tnxlmj{display:flex
+}}.mobile-nav.svelte-1tnxlmj.svelte-1tnxlmj{display:flex;align-items:center;justify-content:space-between;width:100%;font-weight:500}@media(min-width: 800px){.mobile-nav.svelte-1tnxlmj.svelte-1tnxlmj{display:none
+}}#popup.svelte-1tnxlmj.svelte-1tnxlmj{font-size:1.25rem;display:grid;gap:1rem;position:absolute;text-align:center;background-color:var(--background-color, white);box-shadow:var(--box-shadow, 0px 4px 30px rgba(0, 0, 0, 0.1));border-radius:var(--border-radius);inset:0.5rem;bottom:initial;padding:2rem;z-index:1}#popup.svelte-1tnxlmj button#close.svelte-1tnxlmj{position:absolute;right:1rem;top:1rem}
+.section-container.svelte-1ws88pg{display:grid;gap:1rem;place-items:center}.heading.svelte-1ws88pg{margin-bottom:2rem}.container.svelte-1ws88pg{border:1px solid #000;display:inline-block;padding:20px}p.svelte-1ws88pg{color:#555;margin:0 auto;max-width:600px}
+section.svelte-ai4bj7.svelte-ai4bj7{background:var(--color-brand);overflow:hidden}section.image-left.svelte-ai4bj7 figure.svelte-ai4bj7{grid-column:1;grid-row:1}section.image-left.svelte-ai4bj7 .body.svelte-ai4bj7{grid-column:2}.section-container.svelte-ai4bj7.svelte-ai4bj7{display:flex;flex-direction:column-reverse;gap:2rem}@media(min-width: 800px){.section-container.svelte-ai4bj7.svelte-ai4bj7{display:grid;grid-template-columns:1fr 1fr;place-items:center;gap:6rem;padding-block:6rem
+}}.body.svelte-ai4bj7.svelte-ai4bj7{color:var(--color-inverted);display:grid;place-items:start;padding-top:2rem}.body.svelte-ai4bj7 .headline.svelte-ai4bj7{color:var(--color-heading);font-family:var(--font-heading);font-weight:700;font-size:clamp(2.75rem, 10vw, 3rem);line-height:1.1;margin-bottom:1.5rem}.body.svelte-ai4bj7 .subheading.svelte-ai4bj7{font-weight:400;font-size:1.125rem;margin-bottom:2rem}figure.svelte-ai4bj7.svelte-ai4bj7{position:relative}figure.svelte-ai4bj7 img.svelte-ai4bj7{border-radius:var(--border-radius);z-index:1;position:relative;max-height:500px}
+section.svelte-1psz6c1.svelte-1psz6c1{display:grid;gap:3rem}.heading-group.svelte-1psz6c1.svelte-1psz6c1{display:grid;gap:.5rem;text-align:center}ul.svelte-1psz6c1.svelte-1psz6c1{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:3rem}ul.svelte-1psz6c1 li.svelte-1psz6c1{display:grid;place-items:center;text-align:center;gap:0.5rem}ul.svelte-1psz6c1 li .icon.svelte-1psz6c1{color:var(--color-brand);font-size:40px;margin-bottom:1rem}ul.svelte-1psz6c1 li .stat.svelte-1psz6c1{font-weight:700;font-size:2rem}ul.svelte-1psz6c1 li .description.svelte-1psz6c1{opacity:0.7}
+.section-container.svelte-bdo148.svelte-bdo148{max-width:1000px}.heading.svelte-bdo148.svelte-bdo148{text-align:center;margin-bottom:3rem}ul.cards.svelte-bdo148.svelte-bdo148{display:grid;place-items:center;gap:1rem}ul.cards.svelte-bdo148 li.svelte-bdo148{max-width:1000px;padding:1rem 2rem}ul.cards.svelte-bdo148 li figure.svelte-bdo148{padding:0 2rem}ul.cards.svelte-bdo148 li figure img.svelte-bdo148{margin-bottom:2rem;width:100%;max-height:400px}ul.cards.svelte-bdo148 li .info .details.svelte-bdo148{display:grid;text-align:center;margin-bottom:1rem}ul.cards.svelte-bdo148 li .info .details span.name.svelte-bdo148{font-weight:600;margin-bottom:0.25rem}ul.cards.svelte-bdo148 li .info .details span.title.svelte-bdo148{font-size:1rem}ul.cards.svelte-bdo148 li .info .social.svelte-bdo148{display:flex;justify-content:center;gap:1.5rem;font-size:1.5rem;color:black}ul.cards.svelte-bdo148 li .info .social a.svelte-bdo148{transition:var(--transition, 0.1s transform)}ul.cards.svelte-bdo148 li .info .social a.svelte-bdo148:hover{transform:scale(1.1)}@media(min-width: 600px){ul.cards.svelte-bdo148.svelte-bdo148{grid-template-columns:1fr 1fr
+}}@media(min-width: 1000px){ul.cards.svelte-bdo148.svelte-bdo148{grid-template-columns:1fr 1fr 1fr
+}}
+.section-container.svelte-1oe3rov.svelte-1oe3rov.svelte-1oe3rov{display:grid;place-items:center}.heading.svelte-1oe3rov.svelte-1oe3rov.svelte-1oe3rov{text-align:center;margin-bottom:1.5rem}.accordion.svelte-1oe3rov.svelte-1oe3rov.svelte-1oe3rov{width:100%;max-width:900px}.accordion.svelte-1oe3rov .item.svelte-1oe3rov.svelte-1oe3rov{padding:1.5rem 0}.accordion.svelte-1oe3rov .item.svelte-1oe3rov.svelte-1oe3rov:not(:last-child){border-bottom:1px solid var(--border-color, #eee)}.accordion.svelte-1oe3rov .item.active button .icon.svelte-1oe3rov.svelte-1oe3rov{transform:scaleY(-1)}.accordion.svelte-1oe3rov .item button.svelte-1oe3rov.svelte-1oe3rov{display:flex;justify-content:space-between;align-items:center;width:100%}.accordion.svelte-1oe3rov .item button span.svelte-1oe3rov.svelte-1oe3rov{font-size:1.25rem;font-weight:600}.accordion.svelte-1oe3rov .item button .icon.svelte-1oe3rov.svelte-1oe3rov{font-size:1.25rem;color:var(--color-accent, rebeccapurple);transition:transform 0.2s}.accordion.svelte-1oe3rov .item button.svelte-1oe3rov+.description.svelte-1oe3rov{padding-top:0.5rem}.accordion.svelte-1oe3rov .item .description.svelte-1oe3rov.svelte-1oe3rov{padding-right:2rem}
+footer.svelte-zkcamx{background:black;color:white}.section-container.svelte-zkcamx{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4rem;margin-bottom:-3rem}.content.svelte-zkcamx{margin:initial;padding:0;line-height:1.1;align-content:center}</style>
+    </head>
+    <body id="page">
+       
+<div class="section" id="section-37906f64"><header class="section-container svelte-1tnxlmj"><div class="desktop-nav svelte-1tnxlmj"><a href="/" class="logo svelte-1tnxlmj"><img src=" https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <nav class="svelte-1tnxlmj"><a class="link svelte-1tnxlmj" href="/">Home</a><a class="link svelte-1tnxlmj" href="/aboutus">About Us</a><a class="link svelte-1tnxlmj" href="/students">Students</a><a class="link svelte-1tnxlmj" href="/clients">Clients</a><a class="link svelte-1tnxlmj" href="/approach">Approach</a></nav></div>
+  <div class="mobile-nav svelte-1tnxlmj"><a href="/" class="logo svelte-1tnxlmj"><img src=" https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <button id="open" aria-label="Open mobile navigation"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="30" height="30" viewBox="0 0 24 24" class="iconify iconify--eva"><!-- HTML_TAG_START --><rect width="18" height="2" x="3" y="11" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="16" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="6" fill="currentColor" rx=".95" ry=".95"/><!-- HTML_TAG_END --></svg></button>
+    </div></header></div> 
+<div class="section" id="section-80fc0898"><header class="section-container svelte-1ws88pg"><div class="container svelte-1ws88pg"><h1 class="heading svelte-1ws88pg">Our Mission</h1>
+   <p class="svelte-1ws88pg">Pittsburgh Management Consulting is intended to develop the next generation of Consultants and Business Leaders at the University of Pittsburgh by supplementing their skills learned inside of the classroom with tangible experience with corporate clients.
+  </p></div></header></div> 
+<div class="section" id="section-4f23bc69"><section class="svelte-ai4bj7"><div class="section-container svelte-ai4bj7"><div class="body svelte-ai4bj7"><h1 class="headline svelte-ai4bj7">Premier Student-Led Consulting</h1>
+      <div class="subheading svelte-ai4bj7">PMC was founded in 2022 as a branch of the Undergraduate Consulting Club - Pitt's sole resource for students interested in management and strategy consulting. The Consulting Club provides resources for motivated students, and enables them to stand out in recruiting for top consulting roles.</div></div>
+    <figure class="svelte-ai4bj7"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1704854917614lance-anderson-OrpU0RA_HQ8-unsplash.jpg" alt="" class="svelte-ai4bj7"></figure></div></section></div> 
+<div class="section" id="section-bedce850"><section class="section-container svelte-1psz6c1"><div class="heading-group svelte-1psz6c1"><span class="superhead">Our Members</span>
+    <h2 class="heading">We gather bright and passionate individuals from diverse backgrounds.</h2>
+    <span class="subheading"></span></div>
+  <ul class="svelte-1psz6c1"><li class="svelte-1psz6c1"><div class="icon svelte-1psz6c1"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17z"/><!-- HTML_TAG_END --></svg></div>
+        <h3 class="stat svelte-1psz6c1">3.75</h3>
+        <span class="description svelte-1psz6c1">Avg. Member GPA</span>
+      </li><li class="svelte-1psz6c1"><div class="icon svelte-1psz6c1"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M13 12h7v1.5h-7m0-4h7V11h-7m0 3.5h7V16h-7m8-12H3a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 15h-9V6h9"/><!-- HTML_TAG_END --></svg></div>
+        <h3 class="stat svelte-1psz6c1">~50%</h3>
+        <span class="description svelte-1psz6c1">S.T.E.M Majors</span>
+      </li><li class="svelte-1psz6c1"><div class="icon svelte-1psz6c1"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4s7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.39 3.39 0 0 0-1.93.59a5 5 0 0 1 0 5.82A3.39 3.39 0 0 0 15 11a3.5 3.5 0 0 0 0-7"/><!-- HTML_TAG_END --></svg></div>
+        <h3 class="stat svelte-1psz6c1">7</h3>
+        <span class="description svelte-1psz6c1">Students per Team</span>
+      </li></ul></section></div> 
+<div class="section" id="section-55c210eb"><section class="section-container svelte-bdo148"><h2 class="heading svelte-bdo148">Our Team</h2>
+  <ul class="cards svelte-bdo148"><li class="svelte-bdo148"><figure class="svelte-bdo148"><img alt="" src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1693511374428luke.jpeg" class="svelte-bdo148">
+        </figure>
+      <div class="info"><div class="details svelte-bdo148"><span class="name svelte-bdo148">Luke Siegel</span>
+          <span class="title svelte-bdo148">President, Director</span></div>
+        <div class="social svelte-bdo148"><a href="/https://www.linkedin.com/in/luke-siegel/" aria-label="Linkedin" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/><!-- HTML_TAG_END --></svg> 
+            </a><a href="mailto:les218@pitt.edu" aria-label="email" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/><!-- HTML_TAG_END --></svg> 
+            </a>
+        </div></div>
+    </li><li class="svelte-bdo148"><figure class="svelte-bdo148"><img alt="" src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1699567937095ben.jpeg" class="svelte-bdo148">
+        </figure>
+      <div class="info"><div class="details svelte-bdo148"><span class="name svelte-bdo148">Ben Glasl</span>
+          <span class="title svelte-bdo148">Associate Director</span></div>
+        <div class="social svelte-bdo148"><a href="/https://www.linkedin.com/in/benglasl/" aria-label="Linkedin" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/><!-- HTML_TAG_END --></svg> 
+            </a><a href="/mailto:bdg46@pitt.edu" aria-label="email" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/><!-- HTML_TAG_END --></svg> 
+            </a>
+        </div></div>
+    </li><li class="svelte-bdo148"><figure class="svelte-bdo148"><img alt="" src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1699567889946max.jpeg" class="svelte-bdo148">
+        </figure>
+      <div class="info"><div class="details svelte-bdo148"><span class="name svelte-bdo148">Max Brown</span>
+          <span class="title svelte-bdo148">Associate Director</span></div>
+        <div class="social svelte-bdo148"><a href="/https://www.linkedin.com/in/maxwellchristopherbrown/" aria-label="Linkedin" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/><!-- HTML_TAG_END --></svg> 
+            </a><a href="/mailto:mcb144@pitt.edu" aria-label="email" class="svelte-bdo148"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 24 24" class="iconify iconify--mdi"><!-- HTML_TAG_START --><path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/><!-- HTML_TAG_END --></svg> 
+            </a>
+        </div></div>
+    </li></ul></section></div> 
+<div class="section" id="section-c0da1c78"><section class="section-container svelte-1oe3rov"><h2 class="heading svelte-1oe3rov">Frequently Asked Questions</h2>
+  <div class="accordion svelte-1oe3rov"><div class="item svelte-1oe3rov active"><button class="svelte-1oe3rov"><span class="svelte-1oe3rov">How long are PMC projects?</span>
+        <span class="icon svelte-1oe3rov"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 256 256" class="iconify iconify--ph"><!-- HTML_TAG_START --><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/><!-- HTML_TAG_END --></svg>
+        </span></button>
+      <div class="description svelte-1oe3rov"><!-- HTML_TAG_START --><p>PMC projects are semester-long projects, finding a nice balance of agility and thoroughness. Through our engagements, our students are able to integrate themselves with their client, team, and project. However, the semester-long nature prevents stagnation in our projects, and adds a sense of urgency to our solutions.</p><!-- HTML_TAG_END --></div> 
+      <noscript><div class="description svelte-1oe3rov"><!-- HTML_TAG_START --><p>PMC projects are semester-long projects, finding a nice balance of agility and thoroughness. Through our engagements, our students are able to integrate themselves with their client, team, and project. However, the semester-long nature prevents stagnation in our projects, and adds a sense of urgency to our solutions.</p><!-- HTML_TAG_END --></div></noscript>
+    </div><div class="item svelte-1oe3rov"><button class="svelte-1oe3rov"><span class="svelte-1oe3rov">What differentiates Pittsburgh Management Consulting? </span>
+        <span class="icon svelte-1oe3rov"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 256 256" class="iconify iconify--ph"><!-- HTML_TAG_START --><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/><!-- HTML_TAG_END --></svg>
+        </span></button>
+       
+      <noscript><div class="description svelte-1oe3rov"><!-- HTML_TAG_START --><p>We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students.</p><!-- HTML_TAG_END --></div></noscript>
+    </div><div class="item svelte-1oe3rov"><button class="svelte-1oe3rov"><span class="svelte-1oe3rov">What is your association with the Consulting Club @ Pitt?</span>
+        <span class="icon svelte-1oe3rov"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 256 256" class="iconify iconify--ph"><!-- HTML_TAG_START --><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/><!-- HTML_TAG_END --></svg>
+        </span></button>
+       
+      <noscript><div class="description svelte-1oe3rov"><!-- HTML_TAG_START --><p>We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students.</p><!-- HTML_TAG_END --></div></noscript>
+    </div><div class="item svelte-1oe3rov"><button class="svelte-1oe3rov"><span class="svelte-1oe3rov">When do you accept new members? </span>
+        <span class="icon svelte-1oe3rov"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="1em" height="1em" viewBox="0 0 256 256" class="iconify iconify--ph"><!-- HTML_TAG_START --><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z"/><!-- HTML_TAG_END --></svg>
+        </span></button>
+       
+      <noscript><div class="description svelte-1oe3rov"><!-- HTML_TAG_START --><p>We keep our recruiting rolling on a semester-basis. Each semester, we start new projects and reformulate our teams. If you are interested in joining, please look out at the end of each semester for details regarding next semester's recruiting cycle.</p><!-- HTML_TAG_END --></div></noscript>
+    </div></div></section></div> 
+<div class="section" id="section-7c302df0"><footer class="svelte-zkcamx"><div class="section-container svelte-zkcamx"><div class="content svelte-zkcamx"><!-- HTML_TAG_START --><h3 id="pittsburghmanagementconsulting">Pittsburgh Management Consulting</h3>
+<p>3950 Roberto Clemente Dr, Pittsburgh, PA 15260</p>
+<p>pittsburghmanagementconsulting@gmail.com</p><!-- HTML_TAG_END --></div>
+     <div class="social-links"><a><icon icon="mdi:instagram"></icon>
+      </a></div></div></footer></div> 
+
+      <script type="module">
+      import('/_symbols/cee5c4b2-e2a0-4bb8-95bf-56a9b78ed24b.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-c0da1c78'),
+              hydrate: true,
+              props: {"heading":"Frequently Asked Questions","items":[{"title":"How long are PMC projects?","description":{"html":"<p>PMC projects are semester-long projects, finding a nice balance of agility and thoroughness. Through our engagements, our students are able to integrate themselves with their client, team, and project. However, the semester-long nature prevents stagnation in our projects, and adds a sense of urgency to our solutions.</p>","markdown":"PMC projects are semester-long projects, finding a nice balance of agility and thoroughness. Through our engagements, our students are able to integrate themselves with their client, team, and project. However, the semester-long nature prevents stagnation in our projects, and adds a sense of urgency to our solutions."}},{"title":"What differentiates Pittsburgh Management Consulting? ","description":{"html":"<p>We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students.</p>","markdown":"We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students."}},{"title":"What is your association with the Consulting Club @ Pitt?","description":{"html":"<p>We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students.</p>","markdown":"We are the first management consulting organization at the University of Pittsburgh. Focusing on corporate clients, we are able to affect change into firms that have a large impact on our economy and society. The opportunity to understand and network with Fortune 500s and other large companies is a unique experience for our students."}},{"title":"When do you accept new members? ","description":{"html":"<p>We keep our recruiting rolling on a semester-basis. Each semester, we start new projects and reformulate our teams. If you are interested in joining, please look out at the end of each semester for details regarding next semester's recruiting cycle.</p>","markdown":"We keep our recruiting rolling on a semester-basis. Each semester, we start new projects and reformulate our teams. If you are interested in joining, please look out at the end of each semester for details regarding next semester's recruiting cycle."}}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    
+
+      import('/_symbols/bc0cf31a-ef44-4e6d-b298-df342fcfa38b.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-37906f64'),
+              hydrate: true,
+              props: {"logo":{"image":{"alt":"","url":" https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png"},"title":""},"site_nav":[{"link":{"url":"/","label":"Home","active":false}},{"link":{"url":"/aboutus","label":"About Us"}},{"link":{"url":"/students","label":"Students"}},{"link":{"url":"/clients","label":"Clients","active":false}},{"link":{"url":"/approach","label":"Approach","active":false}}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    
+
+      import('/_symbols/e8d64ee7-44a4-4d1b-ad8c-feba00a0f7b6.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-bedce850'),
+              hydrate: true,
+              props: {"superhead":"Our Members","heading":"We gather bright and passionate individuals from diverse backgrounds.","subhead":"","items":[{"icon":"mdi:school","stat":"3.75","description":"Avg. Member GPA"},{"icon":"mdi:book-open","stat":"~50%","description":"S.T.E.M Majors"},{"icon":"mdi:people","stat":"7","description":"Students per Team"}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    
+
+      import('/_symbols/81f756f7-ec53-46f2-ae65-148256a42d57.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-55c210eb'),
+              hydrate: true,
+              props: {"heading":"Our Team","people":[{"name":"Luke Siegel","image":{"alt":"","url":"https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1693511374428luke.jpeg"},"title":"President, Director","social_links":[{"icon":"mdi:linkedin","link":{"url":"/https://www.linkedin.com/in/luke-siegel/","label":"Linkedin"}},{"icon":"mdi:email","link":{"url":"mailto:les218@pitt.edu","label":"email","active":false}}]},{"name":"Ben Glasl","image":{"alt":"","url":"https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1699567937095ben.jpeg"},"title":"Associate Director","social_links":[{"icon":"mdi:linkedin","link":{"url":"/https://www.linkedin.com/in/benglasl/","label":"Linkedin"}},{"icon":"mdi:email","link":{"url":"/mailto:bdg46@pitt.edu","label":"email","active":false}}]},{"name":"Max Brown","image":{"alt":"","url":"https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1699567889946max.jpeg"},"title":"Associate Director","social_links":[{"icon":"mdi:linkedin","link":{"url":"/https://www.linkedin.com/in/maxwellchristopherbrown/","label":"Linkedin"}},{"icon":"mdi:email","link":{"url":"/mailto:mcb144@pitt.edu","label":"email","active":false}}]}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    </script>
+    </body>
+  </html>
+  

@@ -1,0 +1,185 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta name="generator" content="Primo" />
+      <!-- HEAD_svelte-dv8t5k_START --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="UTF-8"><link rel="icon" type="image/png" sizes="32x32" href="https://jbbjtodsvhsgjappwopg.supabase.co/storage/v1/object/public/sites/prisaka/assets/logoipsum-277.svg"><link rel="preconnect" href="https://fonts.bunny.net"><style>/* Reset & standardize default styles */
+@import url("https://unpkg.com/@primo-app/primo@1.3.64/reset.css") layer;
+
+/* Design tokens (apply to components) */
+:root {
+  /* Custom theme options */
+  --color-accent: #004700;
+
+  /* Base values */
+  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+  --border-radius: 0;
+  --border-color: #e0e1e1;
+}
+
+/* Root element (use instead of `body`) */
+#page {
+  font-family: system-ui, sans-serif;
+  color: #111;
+  line-height: 1.5;
+  font-size: 1.125rem;
+  background: white;
+}
+
+/* Elements */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+a.link {
+  line-height: 1.3;
+
+  border-bottom: 2px solid var(--color-accent);
+  transform: translateY(-2px); /* move link back into place */
+  transition: var(--transition, 0.1s border);
+}
+
+a.link:hover {
+    border-color: transparent;
+  }
+
+.heading {
+  font-size: 2.5rem;
+  line-height: 1.15;
+
+}
+
+.button {
+  color: white;
+  background: var(--color-accent, rebeccapurple);
+  border-radius: 0;
+  padding: 18px 24px;
+  transition: var(--transition, 0.1s box-shadow);
+  border: 0;
+}
+
+/* reset */
+
+.button:hover {
+    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);
+  }
+
+.button.inverted {
+    background: transparent;
+    color: var(--color-accent, rebeccapurple);
+  }
+
+/* Content Section */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+.content img {
+    width: 100%;
+    margin: 2rem 0;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+  }
+.content a.link {
+    line-height: 1.3;
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-accent);
+    transform: translateY(-2px); /* move link back into place */
+    transition: var(--transition, 0.1s border);
+  }
+.content a.link:hover {
+      border-color: transparent;
+    }
+.content h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+.content h2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content ul {
+    list-style: disc;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content ol {
+    list-style: decimal;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content blockquote {
+    padding: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--color-accent);
+  }
+</style><!-- HEAD_svelte-dv8t5k_END -->
+      <style>.section-container.svelte-1b2hzyy.svelte-1b2hzyy{display:flex;justify-content:space-between;align-items:center;padding-block:2rem}.logo.svelte-1b2hzyy.svelte-1b2hzyy{font-size:1.5rem;font-weight:600;line-height:10px;max-width:400px;max-height:150px}.desktop-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:none;align-items:center;justify-content:space-between;width:100%}.desktop-nav.svelte-1b2hzyy nav.svelte-1b2hzyy{display:flex;gap:2rem}.desktop-nav.svelte-1b2hzyy nav a.link.svelte-1b2hzyy{border-color:transparent;transition:border-color 0.1s;font-size:0.95rem}.desktop-nav.svelte-1b2hzyy nav a.link.svelte-1b2hzyy:hover,.desktop-nav.svelte-1b2hzyy nav a.link .active.svelte-1b2hzyy{border-color:initial}@media(min-width: 800px){.desktop-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:flex
+}}.mobile-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:flex;align-items:center;justify-content:space-between;width:100%;font-weight:500}@media(min-width: 800px){.mobile-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:none
+}}#popup.svelte-1b2hzyy.svelte-1b2hzyy{font-size:1.25rem;display:grid;gap:1rem;position:absolute;text-align:center;background-color:var(--background-color, white);box-shadow:var(--box-shadow, 0px 4px 30px rgba(0, 0, 0, 0.1));border-radius:var(--border-radius);inset:0.5rem;bottom:initial;padding:2rem;z-index:1}#popup.svelte-1b2hzyy button#close.svelte-1b2hzyy{position:absolute;right:1rem;top:1rem}
+.section-container.svelte-4y4vbt.svelte-4y4vbt{display:grid;place-items:center;text-align:center}.heading.svelte-4y4vbt.svelte-4y4vbt{font-size:3rem;font-weight:700;line-height:1;max-width:850px;margin-bottom:1.5rem}@media(min-width: 700px){.heading.svelte-4y4vbt.svelte-4y4vbt{font-size:4rem
+}}.subheading.svelte-4y4vbt.svelte-4y4vbt{font-size:1.25rem;margin-bottom:2rem}.buttons.svelte-4y4vbt.svelte-4y4vbt{margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:1rem}.buttons.svelte-4y4vbt .button.svelte-4y4vbt{color:black;background-color:lightyellow}
+.section-container.svelte-3d8so4.svelte-3d8so4{padding-top:7rem}.heading.svelte-3d8so4.svelte-3d8so4{margin-bottom:3rem;text-align:center}.items.svelte-3d8so4.svelte-3d8so4{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:5rem 3rem}.item.svelte-3d8so4.svelte-3d8so4{display:grid;place-content:start;gap:1rem}.item.svelte-3d8so4 .title.svelte-3d8so4{color:var(--color-heading);font-size:1.5rem;font-weight:600}.left.svelte-3d8so4 .heading.svelte-3d8so4{text-align:left}
+footer.svelte-zkcamx{background:black;color:white}.section-container.svelte-zkcamx{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4rem;margin-bottom:-3rem}.content.svelte-zkcamx{margin:initial;padding:0;line-height:1.1;align-content:center}</style>
+    </head>
+    <body id="page">
+       
+<div class="section" id="section-50918f2e"><header class="section-container svelte-1b2hzyy"><div class="desktop-nav svelte-1b2hzyy"><a href="/" class="logo svelte-1b2hzyy"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <nav class="svelte-1b2hzyy"><a class="link svelte-1b2hzyy" href="/">Home</a><a class="link svelte-1b2hzyy" href="/ab">About Us</a><a class="link svelte-1b2hzyy" href="/students">Students</a><a class="link svelte-1b2hzyy" href="/clients">Clients</a><a class="link svelte-1b2hzyy" href="/approach">Approach</a></nav></div>
+  <div class="mobile-nav svelte-1b2hzyy"><a href="/" class="logo svelte-1b2hzyy"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <button id="open" aria-label="Open mobile navigation"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="30" height="30" viewBox="0 0 24 24" class="iconify iconify--eva"><!-- HTML_TAG_START --><rect width="18" height="2" x="3" y="11" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="16" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="6" fill="currentColor" rx=".95" ry=".95"/><!-- HTML_TAG_END --></svg></button>
+    </div></header></div> 
+<div class="section" id="section-f1cb3688"><header class="section-container svelte-4y4vbt"><h1 class="heading svelte-4y4vbt">Welcome to Pittsburgh Management Consulting.</h1>
+  <span class="subheading svelte-4y4vbt">At Pittsburgh Management Consulting, we inject fresh, diverse perspectives into your business. Our dynamic team of students, with varied educational backgrounds and real-world experience, is equipped to craft innovative solutions tailored to your business needs. Let us bring energy and creativity to help your business thrive.</span>
+  <div class="buttons svelte-4y4vbt"><a class="button svelte-4y4vbt" href="/">Client Interest Form</a><a class="button svelte-4y4vbt" href="/">Learn More</a></div></header></div> 
+<div class="section" id="section-3bc81609"><section class="section-container  svelte-3d8so4"><h2 class="heading svelte-3d8so4">Our Services</h2>
+  <div class="items svelte-3d8so4"><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Financial Planning</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our clients can benefit from our financial planning consulting services, which help develop effective budgeting, forecasting, and valuation strategies. We work with you to create a tailored financial plan that helps you achieve your business goals.</p><!-- HTML_TAG_END --></div>
+      </div><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Organizational Development</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our organizational development consulting services help our clients improve their organizational culture and structure. We work with you to identify areas of improvement, develop a customized plan, and implement change to optimize your business.</p><!-- HTML_TAG_END --></div>
+      </div><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Technology Strategy</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our tech consulting services help you leverage the latest technology solutions to improve their operations and increase revenue. We work with you to identify technology solutions that fit your business needs and help you stay ahead of the competition.</p><!-- HTML_TAG_END --></div>
+      </div><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Marketing</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our marketing consulting services help our clients develop a marketing plan that drives growth and performance. We work with you to identify your target audience, create effective marketing strategies, measure your success, among other things.</p><!-- HTML_TAG_END --></div>
+      </div><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Human Resources</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our HR consulting services help you attract, retain, and develop talent. We work with you to develop HR policies and procedures that align with your business goals and help you build a strong and productive workforce.</p><!-- HTML_TAG_END --></div>
+      </div><div class="item svelte-3d8so4"><h2 class="title svelte-3d8so4">Operational Optimization</h2>
+        <div class="description"><!-- HTML_TAG_START --><p>Our operations consulting services help our clients optimize their operations and increase efficiency. We work with you to identify areas of improvement, streamline processes, and help you run your business more effectively.</p><!-- HTML_TAG_END --></div>
+      </div></div></section></div> 
+<div class="section" id="section-ba4c45e7"><footer class="svelte-zkcamx"><div class="section-container svelte-zkcamx"><div class="content svelte-zkcamx"><!-- HTML_TAG_START --><h3 id="pittsburghmanagementconsulting">Pittsburgh Management Consulting</h3>
+<p>3950 Roberto Clemente Dr, Pittsburgh, PA 15260</p>
+<p>pittsburghmanagementconsulting@gmail.com</p><!-- HTML_TAG_END --></div>
+     <div class="social-links"><a><icon icon="mdi:instagram"></icon>
+      </a></div></div></footer></div> 
+
+      <script type="module">
+      import('/_symbols/503c4475-19d6-49e0-acd8-d28c534e99ed.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-50918f2e'),
+              hydrate: true,
+              props: {"":"","logo":{"image":{"alt":"","url":"https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png"},"title":""},"site_nav":[{"link":{"url":"/","label":"Home"}},{"link":{"url":"/ab","label":"About Us"}},{"link":{"url":"/students","label":"Students"}},{"link":{"url":"/clients","label":"Clients","active":false}},{"link":{"url":"/approach","label":"Approach","active":false}}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    </script>
+    </body>
+  </html>
+  

@@ -1,0 +1,181 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta name="generator" content="Primo" />
+      <title>Team</title><!-- HEAD_svelte-f4s33s_START --><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="UTF-8"><link rel="icon" type="image/png" sizes="32x32" href="https://jbbjtodsvhsgjappwopg.supabase.co/storage/v1/object/public/sites/prisaka/assets/logoipsum-277.svg"><link rel="preconnect" href="https://fonts.bunny.net"><meta name="description" content="Our team members at the organization"><style>/* Reset & standardize default styles */
+@import url("https://unpkg.com/@primo-app/primo@1.3.64/reset.css") layer;
+
+/* Design tokens (apply to components) */
+:root {
+  /* Custom theme options */
+  --color-accent: #004700;
+
+  /* Base values */
+  --box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+  --border-radius: 0;
+  --border-color: #e0e1e1;
+}
+
+/* Root element (use instead of `body`) */
+#page {
+  font-family: system-ui, sans-serif;
+  color: #111;
+  line-height: 1.5;
+  font-size: 1.125rem;
+  background: white;
+}
+
+/* Elements */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+a.link {
+  line-height: 1.3;
+
+  border-bottom: 2px solid var(--color-accent);
+  transform: translateY(-2px); /* move link back into place */
+  transition: var(--transition, 0.1s border);
+}
+
+a.link:hover {
+    border-color: transparent;
+  }
+
+.heading {
+  font-size: 2.5rem;
+  line-height: 1.15;
+
+}
+
+.button {
+  color: white;
+  background: var(--color-accent, rebeccapurple);
+  border-radius: 0;
+  padding: 18px 24px;
+  transition: var(--transition, 0.1s box-shadow);
+  border: 0;
+}
+
+/* reset */
+
+.button:hover {
+    box-shadow: 0 0 0 2px var(--color-accent, rebeccapurple);
+  }
+
+.button.inverted {
+    background: transparent;
+    color: var(--color-accent, rebeccapurple);
+  }
+
+/* Content Section */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+.content img {
+    width: 100%;
+    margin: 2rem 0;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+  }
+.content a.link {
+    line-height: 1.3;
+    font-weight: 500;
+    border-bottom: 2px solid var(--color-accent);
+    transform: translateY(-2px); /* move link back into place */
+    transition: var(--transition, 0.1s border);
+  }
+.content a.link:hover {
+      border-color: transparent;
+    }
+.content h1 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+.content h2 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+.content ul {
+    list-style: disc;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content ol {
+    list-style: decimal;
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+  }
+.content blockquote {
+    padding: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--color-accent);
+  }
+</style><!-- HEAD_svelte-f4s33s_END -->
+      <style>.section-container.svelte-1b2hzyy.svelte-1b2hzyy{display:flex;justify-content:space-between;align-items:center;padding-block:2rem}.logo.svelte-1b2hzyy.svelte-1b2hzyy{font-size:1.5rem;font-weight:600;line-height:10px;max-width:400px;max-height:150px}.desktop-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:none;align-items:center;justify-content:space-between;width:100%}.desktop-nav.svelte-1b2hzyy nav.svelte-1b2hzyy{display:flex;gap:2rem}.desktop-nav.svelte-1b2hzyy nav a.link.svelte-1b2hzyy{border-color:transparent;transition:border-color 0.1s;font-size:0.95rem}.desktop-nav.svelte-1b2hzyy nav a.link.svelte-1b2hzyy:hover,.desktop-nav.svelte-1b2hzyy nav a.link .active.svelte-1b2hzyy{border-color:initial}@media(min-width: 800px){.desktop-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:flex
+}}.mobile-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:flex;align-items:center;justify-content:space-between;width:100%;font-weight:500}@media(min-width: 800px){.mobile-nav.svelte-1b2hzyy.svelte-1b2hzyy{display:none
+}}#popup.svelte-1b2hzyy.svelte-1b2hzyy{font-size:1.25rem;display:grid;gap:1rem;position:absolute;text-align:center;background-color:var(--background-color, white);box-shadow:var(--box-shadow, 0px 4px 30px rgba(0, 0, 0, 0.1));border-radius:var(--border-radius);inset:0.5rem;bottom:initial;padding:2rem;z-index:1}#popup.svelte-1b2hzyy button#close.svelte-1b2hzyy{position:absolute;right:1rem;top:1rem}
+.section-container.svelte-3mf01x{display:grid;place-items:center;text-align:center}.heading.svelte-3mf01x{font-size:3rem;font-weight:700;line-height:1;max-width:850px;margin-bottom:-3rem}@media(min-width: 700px){.heading.svelte-3mf01x{font-size:4rem
+}}
+.heading-group.svelte-w32hd1.svelte-w32hd1{display:grid;gap:1rem;place-content:start;text-align:left;max-width:9000px;margin-bottom:3rem;margin-top:-5rem}.logos.svelte-w32hd1.svelte-w32hd1{align-content:center;width:100%;display:grid;grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));place-items:center;gap:2rem}.logos.small.svelte-w32hd1.svelte-w32hd1{grid-template-columns:repeat(auto-fit, minmax(100px, 1fr))}.logos.medium.svelte-w32hd1.svelte-w32hd1{grid-template-columns:repeat(auto-fit, minmax(200px, 1fr))}.logos.large.svelte-w32hd1.svelte-w32hd1{grid-template-columns:repeat(auto-fit, minmax(300px, 1fr))}
+header.svelte-zpkn47.svelte-zpkn47{color:var(--color-white, white);position:relative;overflow:hidden;background:var(--color-background)}img.svelte-zpkn47.svelte-zpkn47{position:absolute;inset:0;height:100%;width:100%;-o-object-fit:cover;object-fit:cover;z-index:0}.heading-group.svelte-zpkn47.svelte-zpkn47{background:#12121260;display:grid;place-items:center;padding-top:12rem;padding-bottom:12rem;position:relative;gap:1rem}.heading-group.svelte-zpkn47 .heading.svelte-zpkn47{font-size:clamp(2rem, 10vw, 3.5rem);color:var(--color-white, white)}.heading-group.svelte-zpkn47 .subheading.svelte-zpkn47{place-self:center;font-size:1.125rem;line-height:1.3;color:var(--color-inverted);margin-left:5rem;margin-right:5rem;text-align:center}.buttons.svelte-zpkn47.svelte-zpkn47{margin-top:1rem;display:flex;justify-content:center;gap:1rem}.buttons.svelte-zpkn47 .button.svelte-zpkn47{background:transparent;color:var(--color-inverted);border:1.5px solid white}
+footer.svelte-zkcamx{background:black;color:white}.section-container.svelte-zkcamx{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4rem;margin-bottom:-3rem}.content.svelte-zkcamx{margin:initial;padding:0;line-height:1.1;align-content:center}</style>
+    </head>
+    <body id="page">
+       
+<div class="section" id="section-961de160"><header class="section-container svelte-1b2hzyy"><div class="desktop-nav svelte-1b2hzyy"><a href="/" class="logo svelte-1b2hzyy"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <nav class="svelte-1b2hzyy"><a class="link svelte-1b2hzyy" href="/">Home</a><a class="link svelte-1b2hzyy" href="/ab">About Us</a><a class="link svelte-1b2hzyy" href="/students">Students</a><a class="link svelte-1b2hzyy" href="/clients">Clients</a><a class="link svelte-1b2hzyy" href="/approach">Approach</a></nav></div>
+  <div class="mobile-nav svelte-1b2hzyy"><a href="/" class="logo svelte-1b2hzyy"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png" alt=""></a>
+    <button id="open" aria-label="Open mobile navigation"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden role="img" width="30" height="30" viewBox="0 0 24 24" class="iconify iconify--eva"><!-- HTML_TAG_START --><rect width="18" height="2" x="3" y="11" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="16" fill="currentColor" rx=".95" ry=".95"/><rect width="18" height="2" x="3" y="6" fill="currentColor" rx=".95" ry=".95"/><!-- HTML_TAG_END --></svg></button>
+    </div></header></div> 
+<div class="section" id="section-95b3154d"><header class="section-container svelte-3mf01x"><h1 class="heading svelte-3mf01x">Our Student Placement</h1></header></div> 
+<div class="section" id="section-36d15ebf"><section class="section-container svelte-w32hd1"><div><header class="heading-group svelte-w32hd1"><span class="superhead"></span>
+      <h2 class="heading"></h2></header>
+    <div class="logos small svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295443206mckinsey---company_owler_20190728_090718_original.png" alt="" class="svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295414298BCG-logo.jpg" alt="" class="svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295468851EY_logo_2019.svg.png" alt="" class="svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295458994Deloitte-logo.png" alt="" class="svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295479468PricewaterhouseCoopers_Logo.svg" alt="" class="svelte-w32hd1"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1701295496083grant-thornton.png" alt="" class="svelte-w32hd1"></div></div></section></div> 
+<div class="section" id="section-6ff85f26"><header class="svelte-zpkn47"><img src="https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1704854890000vidar-nordli-mathisen-9HGqJq3vglc-unsplash.jpg" alt="" class="svelte-zpkn47">
+  <div class="heading-group svelte-zpkn47"><h1 class="heading svelte-zpkn47">Join Our Team</h1>
+    <span class="subheading svelte-zpkn47">Welcome to Pittsburgh Management Consulting (PMC), the University of Pittsburgh’s premier student-led consulting group. Here at PMC, our members collaborate with Fortune 500 companies and local Pittsburgh businesses to craft innovative solutions for real-world business challenges. </span>
+       <span class="subheading svelte-zpkn47">Each project team, consisting of six to eight students, engages in semester-long collaborations. Within these teams, you'll find Analysts, Consultants, and Project Managers, each playing a crucial role with unique time commitments and responsibilities.  Discover more about each role and get ready to apply for the exciting projects lined up for the next semester!</span>
+    <span class="subheading svelte-zpkn47">Discover more about each role and apply for the exciting projects lined up for the next semester!</span>
+
+    
+    <div class="buttons svelte-zpkn47"><a href="/role_description" class="button svelte-zpkn47">Role Descriptions</a><a href="/apply" class="button svelte-zpkn47">Apply</a></div></div></header></div> 
+<div class="section" id="section-2bf67698"><footer class="svelte-zkcamx"><div class="section-container svelte-zkcamx"><div class="content svelte-zkcamx"><!-- HTML_TAG_START --><h3 id="pittsburghmanagementconsulting">Pittsburgh Management Consulting</h3>
+<p>3950 Roberto Clemente Dr, Pittsburgh, PA 15260</p>
+<p>pittsburghmanagementconsulting@gmail.com</p><!-- HTML_TAG_END --></div>
+     <div class="social-links"><a><icon icon="mdi:instagram"></icon>
+      </a></div></div></footer></div> 
+
+      <script type="module">
+      import('/_symbols/503c4475-19d6-49e0-acd8-d28c534e99ed.js')
+      .then(({default:App}) => {
+        
+            new App({
+              target: document.querySelector('#section-961de160'),
+              hydrate: true,
+              props: {"":"","logo":{"image":{"alt":"","url":"https://syjrioqdlkucbdqnirzj.supabase.co/storage/v1/object/public/images/555ac2a8-00fa-458d-ac56-1f28aca2f19d/1703254580745Screenshot%202023-12-22%20at%209.16.15%20AM.png"},"title":""},"site_nav":[{"link":{"url":"/","label":"Home"}},{"link":{"url":"/ab","label":"About Us"}},{"link":{"url":"/students","label":"Students"}},{"link":{"url":"/clients","label":"Clients","active":false}},{"link":{"url":"/approach","label":"Approach","active":false}}]}
+            })
+          
+      })
+      .catch(e => console.error(e))
+    </script>
+    </body>
+  </html>
+  
