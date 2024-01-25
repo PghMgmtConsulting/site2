@@ -2808,7 +2808,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (81:6) {#each social as {link, icon}}
+// (82:6) {#each social as {link, icon}}
 function create_each_block(ctx) {
 	let li;
 	let a;
@@ -2847,8 +2847,8 @@ function create_each_block(ctx) {
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[4].url);
 			attr(a, "aria-label", a_aria_label_value = /*link*/ ctx[4].label);
-			attr(a, "class", "svelte-1a6ie1v");
-			attr(li, "class", "svelte-1a6ie1v");
+			attr(a, "class", "svelte-1tddirf");
+			attr(li, "class", "svelte-1tddirf");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -2932,9 +2932,9 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(ul, "class", "svelte-1a6ie1v");
-			attr(div, "class", "card svelte-1a6ie1v");
-			attr(section, "class", "section-container svelte-1a6ie1v");
+			attr(ul, "class", "svelte-1tddirf");
+			attr(div, "class", "card svelte-1tddirf");
+			attr(section, "class", "section-container svelte-1tddirf");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
