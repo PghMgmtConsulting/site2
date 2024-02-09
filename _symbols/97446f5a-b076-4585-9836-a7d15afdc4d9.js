@@ -165,12 +165,6 @@ function detach(node) {
         node.parentNode.removeChild(node);
     }
 }
-function destroy_each(iterations, detaching) {
-    for (let i = 0; i < iterations.length; i += 1) {
-        if (iterations[i])
-            iterations[i].d(detaching);
-    }
-}
 function element(name) {
     return document.createElement(name);
 }
@@ -276,15 +270,6 @@ function claim_text(nodes, data) {
 }
 function claim_space(nodes) {
     return claim_text(nodes, ' ');
-}
-function set_data(text, data) {
-    data = '' + data;
-    if (text.data === data)
-        return;
-    text.data = data;
-}
-function toggle_class(element, name, toggle) {
-    element.classList[toggle ? 'add' : 'remove'](name);
 }
 
 let current_component;
@@ -539,1198 +524,325 @@ class SvelteComponent {
     }
 }
 
-const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
-  const colonSeparated = value.split(":");
-  if (value.slice(0, 1) === "@") {
-    if (colonSeparated.length < 2 || colonSeparated.length > 3) {
-      return null;
-    }
-    provider = colonSeparated.shift().slice(1);
-  }
-  if (colonSeparated.length > 3 || !colonSeparated.length) {
-    return null;
-  }
-  if (colonSeparated.length > 1) {
-    const name2 = colonSeparated.pop();
-    const prefix = colonSeparated.pop();
-    const result = {
-      // Allow provider without '@': "provider:prefix:name"
-      provider: colonSeparated.length > 0 ? colonSeparated[0] : provider,
-      prefix,
-      name: name2
-    };
-    return validate && !validateIconName(result) ? null : result;
-  }
-  const name = colonSeparated[0];
-  const dashSeparated = name.split("-");
-  if (dashSeparated.length > 1) {
-    const result = {
-      provider,
-      prefix: dashSeparated.shift(),
-      name: dashSeparated.join("-")
-    };
-    return validate && !validateIconName(result) ? null : result;
-  }
-  if (allowSimpleName && provider === "") {
-    const result = {
-      provider,
-      prefix: "",
-      name
-    };
-    return validate && !validateIconName(result, allowSimpleName) ? null : result;
-  }
-  return null;
-};
-const validateIconName = (icon, allowSimpleName) => {
-  if (!icon) {
-    return false;
-  }
-  return !!((icon.provider === "" || icon.provider.match(matchIconName)) && (allowSimpleName && icon.prefix === "" || icon.prefix.match(matchIconName)) && icon.name.match(matchIconName));
-};
-
-const defaultIconDimensions = Object.freeze(
-  {
-    left: 0,
-    top: 0,
-    width: 16,
-    height: 16
-  }
-);
-const defaultIconTransformations = Object.freeze({
-  rotate: 0,
-  vFlip: false,
-  hFlip: false
-});
-const defaultIconProps = Object.freeze({
-  ...defaultIconDimensions,
-  ...defaultIconTransformations
-});
-const defaultExtendedIconProps = Object.freeze({
-  ...defaultIconProps,
-  body: "",
-  hidden: false
-});
-
-function mergeIconTransformations(obj1, obj2) {
-  const result = {};
-  if (!obj1.hFlip !== !obj2.hFlip) {
-    result.hFlip = true;
-  }
-  if (!obj1.vFlip !== !obj2.vFlip) {
-    result.vFlip = true;
-  }
-  const rotate = ((obj1.rotate || 0) + (obj2.rotate || 0)) % 4;
-  if (rotate) {
-    result.rotate = rotate;
-  }
-  return result;
-}
-
-function mergeIconData(parent, child) {
-  const result = mergeIconTransformations(parent, child);
-  for (const key in defaultExtendedIconProps) {
-    if (key in defaultIconTransformations) {
-      if (key in parent && !(key in result)) {
-        result[key] = defaultIconTransformations[key];
-      }
-    } else if (key in child) {
-      result[key] = child[key];
-    } else if (key in parent) {
-      result[key] = parent[key];
-    }
-  }
-  return result;
-}
-
-function getIconsTree(data, names) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  const resolved = /* @__PURE__ */ Object.create(null);
-  function resolve(name) {
-    if (icons[name]) {
-      return resolved[name] = [];
-    }
-    if (!(name in resolved)) {
-      resolved[name] = null;
-      const parent = aliases[name] && aliases[name].parent;
-      const value = parent && resolve(parent);
-      if (value) {
-        resolved[name] = [parent].concat(value);
-      }
-    }
-    return resolved[name];
-  }
-  (names || Object.keys(icons).concat(Object.keys(aliases))).forEach(resolve);
-  return resolved;
-}
-
-function internalGetIconData(data, name, tree) {
-  const icons = data.icons;
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  let currentProps = {};
-  function parse(name2) {
-    currentProps = mergeIconData(
-      icons[name2] || aliases[name2],
-      currentProps
-    );
-  }
-  parse(name);
-  tree.forEach(parse);
-  return mergeIconData(data, currentProps);
-}
-
-function parseIconSet(data, callback) {
-  const names = [];
-  if (typeof data !== "object" || typeof data.icons !== "object") {
-    return names;
-  }
-  if (data.not_found instanceof Array) {
-    data.not_found.forEach((name) => {
-      callback(name, null);
-      names.push(name);
-    });
-  }
-  const tree = getIconsTree(data);
-  for (const name in tree) {
-    const item = tree[name];
-    if (item) {
-      callback(name, internalGetIconData(data, name, item));
-      names.push(name);
-    }
-  }
-  return names;
-}
-
-const optionalPropertyDefaults = {
-  provider: "",
-  aliases: {},
-  not_found: {},
-  ...defaultIconDimensions
-};
-function checkOptionalProps(item, defaults) {
-  for (const prop in defaults) {
-    if (prop in item && typeof item[prop] !== typeof defaults[prop]) {
-      return false;
-    }
-  }
-  return true;
-}
-function quicklyValidateIconSet(obj) {
-  if (typeof obj !== "object" || obj === null) {
-    return null;
-  }
-  const data = obj;
-  if (typeof data.prefix !== "string" || !obj.icons || typeof obj.icons !== "object") {
-    return null;
-  }
-  if (!checkOptionalProps(obj, optionalPropertyDefaults)) {
-    return null;
-  }
-  const icons = data.icons;
-  for (const name in icons) {
-    const icon = icons[name];
-    if (!name.match(matchIconName) || typeof icon.body !== "string" || !checkOptionalProps(
-      icon,
-      defaultExtendedIconProps
-    )) {
-      return null;
-    }
-  }
-  const aliases = data.aliases || /* @__PURE__ */ Object.create(null);
-  for (const name in aliases) {
-    const icon = aliases[name];
-    const parent = icon.parent;
-    if (!name.match(matchIconName) || typeof parent !== "string" || !icons[parent] && !aliases[parent] || !checkOptionalProps(
-      icon,
-      defaultExtendedIconProps
-    )) {
-      return null;
-    }
-  }
-  return data;
-}
-
-const dataStorage = /* @__PURE__ */ Object.create(null);
-function newStorage(provider, prefix) {
-  return {
-    provider,
-    prefix,
-    icons: /* @__PURE__ */ Object.create(null),
-    missing: /* @__PURE__ */ new Set()
-  };
-}
-function getStorage(provider, prefix) {
-  const providerStorage = dataStorage[provider] || (dataStorage[provider] = /* @__PURE__ */ Object.create(null));
-  return providerStorage[prefix] || (providerStorage[prefix] = newStorage(provider, prefix));
-}
-function addIconSet(storage, data) {
-  if (!quicklyValidateIconSet(data)) {
-    return [];
-  }
-  return parseIconSet(data, (name, icon) => {
-    if (icon) {
-      storage.icons[name] = icon;
-    } else {
-      storage.missing.add(name);
-    }
-  });
-}
-function addIconToStorage(storage, name, icon) {
-  try {
-    if (typeof icon.body === "string") {
-      storage.icons[name] = { ...icon };
-      return true;
-    }
-  } catch (err) {
-  }
-  return false;
-}
-
-let simpleNames = false;
-function allowSimpleNames(allow) {
-  if (typeof allow === "boolean") {
-    simpleNames = allow;
-  }
-  return simpleNames;
-}
-function addIcon(name, data) {
-  const icon = stringToIcon(name, true, simpleNames);
-  if (!icon) {
-    return false;
-  }
-  const storage = getStorage(icon.provider, icon.prefix);
-  return addIconToStorage(storage, icon.name, data);
-}
-function addCollection(data, provider) {
-  if (typeof data !== "object") {
-    return false;
-  }
-  if (typeof provider !== "string") {
-    provider = data.provider || "";
-  }
-  if (simpleNames && !provider && !data.prefix) {
-    let added = false;
-    if (quicklyValidateIconSet(data)) {
-      data.prefix = "";
-      parseIconSet(data, (name, icon) => {
-        if (icon && addIcon(name, icon)) {
-          added = true;
-        }
-      });
-    }
-    return added;
-  }
-  const prefix = data.prefix;
-  if (!validateIconName({
-    provider,
-    prefix,
-    name: "a"
-  })) {
-    return false;
-  }
-  const storage = getStorage(provider, prefix);
-  return !!addIconSet(storage, data);
-}
-
-const defaultIconSizeCustomisations = Object.freeze({
-  width: null,
-  height: null
-});
-const defaultIconCustomisations = Object.freeze({
-  // Dimensions
-  ...defaultIconSizeCustomisations,
-  // Transformations
-  ...defaultIconTransformations
-});
-"IconifyId" + Date.now().toString(16) + (Math.random() * 16777216 | 0).toString(16);
-
-const storage = /* @__PURE__ */ Object.create(null);
-function setAPIModule(provider, item) {
-  storage[provider] = item;
-}
-
-function createAPIConfig(source) {
-  let resources;
-  if (typeof source.resources === "string") {
-    resources = [source.resources];
-  } else {
-    resources = source.resources;
-    if (!(resources instanceof Array) || !resources.length) {
-      return null;
-    }
-  }
-  const result = {
-    // API hosts
-    resources,
-    // Root path
-    path: source.path || "/",
-    // URL length limit
-    maxURL: source.maxURL || 500,
-    // Timeout before next host is used.
-    rotate: source.rotate || 750,
-    // Timeout before failing query.
-    timeout: source.timeout || 5e3,
-    // Randomise default API end point.
-    random: source.random === true,
-    // Start index
-    index: source.index || 0,
-    // Receive data after time out (used if time out kicks in first, then API module sends data anyway).
-    dataAfterTimeout: source.dataAfterTimeout !== false
-  };
-  return result;
-}
-const configStorage = /* @__PURE__ */ Object.create(null);
-const fallBackAPISources = [
-  "https://api.simplesvg.com",
-  "https://api.unisvg.com"
-];
-const fallBackAPI = [];
-while (fallBackAPISources.length > 0) {
-  if (fallBackAPISources.length === 1) {
-    fallBackAPI.push(fallBackAPISources.shift());
-  } else {
-    if (Math.random() > 0.5) {
-      fallBackAPI.push(fallBackAPISources.shift());
-    } else {
-      fallBackAPI.push(fallBackAPISources.pop());
-    }
-  }
-}
-configStorage[""] = createAPIConfig({
-  resources: ["https://api.iconify.design"].concat(fallBackAPI)
-});
-function addAPIProvider(provider, customConfig) {
-  const config = createAPIConfig(customConfig);
-  if (config === null) {
-    return false;
-  }
-  configStorage[provider] = config;
-  return true;
-}
-function getAPIConfig(provider) {
-  return configStorage[provider];
-}
-
-const detectFetch = () => {
-  let callback;
-  try {
-    callback = fetch;
-    if (typeof callback === "function") {
-      return callback;
-    }
-  } catch (err) {
-  }
-};
-let fetchModule = detectFetch();
-function calculateMaxLength(provider, prefix) {
-  const config = getAPIConfig(provider);
-  if (!config) {
-    return 0;
-  }
-  let result;
-  if (!config.maxURL) {
-    result = 0;
-  } else {
-    let maxHostLength = 0;
-    config.resources.forEach((item) => {
-      const host = item;
-      maxHostLength = Math.max(maxHostLength, host.length);
-    });
-    const url = prefix + ".json?icons=";
-    result = config.maxURL - maxHostLength - config.path.length - url.length;
-  }
-  return result;
-}
-function shouldAbort(status) {
-  return status === 404;
-}
-const prepare = (provider, prefix, icons) => {
-  const results = [];
-  const maxLength = calculateMaxLength(provider, prefix);
-  const type = "icons";
-  let item = {
-    type,
-    provider,
-    prefix,
-    icons: []
-  };
-  let length = 0;
-  icons.forEach((name, index) => {
-    length += name.length + 1;
-    if (length >= maxLength && index > 0) {
-      results.push(item);
-      item = {
-        type,
-        provider,
-        prefix,
-        icons: []
-      };
-      length = name.length;
-    }
-    item.icons.push(name);
-  });
-  results.push(item);
-  return results;
-};
-function getPath(provider) {
-  if (typeof provider === "string") {
-    const config = getAPIConfig(provider);
-    if (config) {
-      return config.path;
-    }
-  }
-  return "/";
-}
-const send = (host, params, callback) => {
-  if (!fetchModule) {
-    callback("abort", 424);
-    return;
-  }
-  let path = getPath(params.provider);
-  switch (params.type) {
-    case "icons": {
-      const prefix = params.prefix;
-      const icons = params.icons;
-      const iconsList = icons.join(",");
-      const urlParams = new URLSearchParams({
-        icons: iconsList
-      });
-      path += prefix + ".json?" + urlParams.toString();
-      break;
-    }
-    case "custom": {
-      const uri = params.uri;
-      path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
-      break;
-    }
-    default:
-      callback("abort", 400);
-      return;
-  }
-  let defaultError = 503;
-  fetchModule(host + path).then((response) => {
-    const status = response.status;
-    if (status !== 200) {
-      setTimeout(() => {
-        callback(shouldAbort(status) ? "abort" : "next", status);
-      });
-      return;
-    }
-    defaultError = 501;
-    return response.json();
-  }).then((data) => {
-    if (typeof data !== "object" || data === null) {
-      setTimeout(() => {
-        if (data === 404) {
-          callback("abort", data);
-        } else {
-          callback("next", defaultError);
-        }
-      });
-      return;
-    }
-    setTimeout(() => {
-      callback("success", data);
-    });
-  }).catch(() => {
-    callback("next", defaultError);
-  });
-};
-const fetchAPIModule = {
-  prepare,
-  send
-};
-
-const browserCacheVersion = "iconify2";
-const browserCachePrefix = "iconify";
-const browserCacheCountKey = browserCachePrefix + "-count";
-const browserCacheVersionKey = browserCachePrefix + "-version";
-const browserStorageHour = 36e5;
-const browserStorageCacheExpiration = 168;
-
-function getStoredItem(func, key) {
-  try {
-    return func.getItem(key);
-  } catch (err) {
-  }
-}
-function setStoredItem(func, key, value) {
-  try {
-    func.setItem(key, value);
-    return true;
-  } catch (err) {
-  }
-}
-function removeStoredItem(func, key) {
-  try {
-    func.removeItem(key);
-  } catch (err) {
-  }
-}
-
-function setBrowserStorageItemsCount(storage, value) {
-  return setStoredItem(storage, browserCacheCountKey, value.toString());
-}
-function getBrowserStorageItemsCount(storage) {
-  return parseInt(getStoredItem(storage, browserCacheCountKey)) || 0;
-}
-
-const browserStorageConfig = {
-  local: true,
-  session: true
-};
-const browserStorageEmptyItems = {
-  local: /* @__PURE__ */ new Set(),
-  session: /* @__PURE__ */ new Set()
-};
-let browserStorageStatus = false;
-function setBrowserStorageStatus(status) {
-  browserStorageStatus = status;
-}
-
-let _window = typeof window === "undefined" ? {} : window;
-function getBrowserStorage(key) {
-  const attr = key + "Storage";
-  try {
-    if (_window && _window[attr] && typeof _window[attr].length === "number") {
-      return _window[attr];
-    }
-  } catch (err) {
-  }
-  browserStorageConfig[key] = false;
-}
-
-function iterateBrowserStorage(key, callback) {
-  const func = getBrowserStorage(key);
-  if (!func) {
-    return;
-  }
-  const version = getStoredItem(func, browserCacheVersionKey);
-  if (version !== browserCacheVersion) {
-    if (version) {
-      const total2 = getBrowserStorageItemsCount(func);
-      for (let i = 0; i < total2; i++) {
-        removeStoredItem(func, browserCachePrefix + i.toString());
-      }
-    }
-    setStoredItem(func, browserCacheVersionKey, browserCacheVersion);
-    setBrowserStorageItemsCount(func, 0);
-    return;
-  }
-  const minTime = Math.floor(Date.now() / browserStorageHour) - browserStorageCacheExpiration;
-  const parseItem = (index) => {
-    const name = browserCachePrefix + index.toString();
-    const item = getStoredItem(func, name);
-    if (typeof item !== "string") {
-      return;
-    }
-    try {
-      const data = JSON.parse(item);
-      if (typeof data === "object" && typeof data.cached === "number" && data.cached > minTime && typeof data.provider === "string" && typeof data.data === "object" && typeof data.data.prefix === "string" && // Valid item: run callback
-      callback(data, index)) {
-        return true;
-      }
-    } catch (err) {
-    }
-    removeStoredItem(func, name);
-  };
-  let total = getBrowserStorageItemsCount(func);
-  for (let i = total - 1; i >= 0; i--) {
-    if (!parseItem(i)) {
-      if (i === total - 1) {
-        total--;
-        setBrowserStorageItemsCount(func, total);
-      } else {
-        browserStorageEmptyItems[key].add(i);
-      }
-    }
-  }
-}
-
-function initBrowserStorage() {
-  if (browserStorageStatus) {
-    return;
-  }
-  setBrowserStorageStatus(true);
-  for (const key in browserStorageConfig) {
-    iterateBrowserStorage(key, (item) => {
-      const iconSet = item.data;
-      const provider = item.provider;
-      const prefix = iconSet.prefix;
-      const storage = getStorage(
-        provider,
-        prefix
-      );
-      if (!addIconSet(storage, iconSet).length) {
-        return false;
-      }
-      const lastModified = iconSet.lastModified || -1;
-      storage.lastModifiedCached = storage.lastModifiedCached ? Math.min(storage.lastModifiedCached, lastModified) : lastModified;
-      return true;
-    });
-  }
-}
-
-({
-    ...defaultIconCustomisations,
-    inline: false,
-});
-const monotoneProps = {
-    'background-color': 'currentColor',
-};
-const coloredProps = {
-    'background-color': 'transparent',
-};
-// Dynamically add common props to variables above
-const propsToAdd = {
-    image: 'var(--svg)',
-    repeat: 'no-repeat',
-    size: '100% 100%',
-};
-const propsToAddTo = {
-    '-webkit-mask': monotoneProps,
-    'mask': monotoneProps,
-    'background': coloredProps,
-};
-for (const prefix in propsToAddTo) {
-    const list = propsToAddTo[prefix];
-    for (const prop in propsToAdd) {
-        list[prefix + '-' + prop] = propsToAdd[prop];
-    }
-}
-/**
- * Initialise stuff
- */
-// Enable short names
-allowSimpleNames(true);
-// Set API module
-setAPIModule('', fetchAPIModule);
-/**
- * Browser stuff
- */
-if (typeof document !== 'undefined' && typeof window !== 'undefined') {
-    // Set cache and load existing cache
-    initBrowserStorage();
-    const _window = window;
-    // Load icons from global "IconifyPreload"
-    if (_window.IconifyPreload !== void 0) {
-        const preload = _window.IconifyPreload;
-        const err = 'Invalid IconifyPreload syntax.';
-        if (typeof preload === 'object' && preload !== null) {
-            (preload instanceof Array ? preload : [preload]).forEach((item) => {
-                try {
-                    if (
-                    // Check if item is an object and not null/array
-                    typeof item !== 'object' ||
-                        item === null ||
-                        item instanceof Array ||
-                        // Check for 'icons' and 'prefix'
-                        typeof item.icons !== 'object' ||
-                        typeof item.prefix !== 'string' ||
-                        // Add icon set
-                        !addCollection(item)) {
-                        console.error(err);
-                    }
-                }
-                catch (e) {
-                    console.error(err);
-                }
-            });
-        }
-    }
-    // Set API from global "IconifyProviders"
-    if (_window.IconifyProviders !== void 0) {
-        const providers = _window.IconifyProviders;
-        if (typeof providers === 'object' && providers !== null) {
-            for (let key in providers) {
-                const err = 'IconifyProviders[' + key + '] is invalid.';
-                try {
-                    const value = providers[key];
-                    if (typeof value !== 'object' ||
-                        !value ||
-                        value.resources === void 0) {
-                        continue;
-                    }
-                    if (!addAPIProvider(key, value)) {
-                        console.error(err);
-                    }
-                }
-                catch (e) {
-                    console.error(err);
-                }
-            }
-        }
-    }
-}
-
 /* generated by Svelte v3.59.1 */
 
-function get_each_context(ctx, list, i) {
-	const child_ctx = ctx.slice();
-	child_ctx[5] = list[i].link;
-	return child_ctx;
-}
-
-// (168:31) 
-function create_if_block_3(ctx) {
-	let img;
-	let img_src_value;
-	let img_alt_value;
-
-	return {
-		c() {
-			img = element("img");
-			this.h();
-		},
-		l(nodes) {
-			img = claim_element(nodes, "IMG", { class: true, src: true, alt: true });
-			this.h();
-		},
-		h() {
-			attr(img, "class", "img svelte-1j000gj");
-			if (!src_url_equal(img.src, img_src_value = /*logo*/ ctx[0].image.url)) attr(img, "src", img_src_value);
-			attr(img, "alt", img_alt_value = /*logo*/ ctx[0].image.alt);
-		},
-		m(target, anchor) {
-			insert_hydration(target, img, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*logo*/ 1 && !src_url_equal(img.src, img_src_value = /*logo*/ ctx[0].image.url)) {
-				attr(img, "src", img_src_value);
-			}
-
-			if (dirty & /*logo*/ 1 && img_alt_value !== (img_alt_value = /*logo*/ ctx[0].image.alt)) {
-				attr(img, "alt", img_alt_value);
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(img);
-		}
-	};
-}
-
-// (166:6) {#if logo.title}
-function create_if_block_2(ctx) {
-	let t_value = /*logo*/ ctx[0].title + "";
-	let t;
-
-	return {
-		c() {
-			t = text(t_value);
-		},
-		l(nodes) {
-			t = claim_text(nodes, t_value);
-		},
-		m(target, anchor) {
-			insert_hydration(target, t, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*logo*/ 1 && t_value !== (t_value = /*logo*/ ctx[0].title + "")) set_data(t, t_value);
-		},
-		d(detaching) {
-			if (detaching) detach(t);
-		}
-	};
-}
-
-// (173:6) {#each site_nav as { link }}
-function create_each_block(ctx) {
-	let a;
-	let t_value = /*link*/ ctx[5].label + "";
-	let t;
-	let a_href_value;
-
-	return {
-		c() {
-			a = element("a");
-			t = text(t_value);
-			this.h();
-		},
-		l(nodes) {
-			a = claim_element(nodes, "A", { class: true, href: true });
-			var a_nodes = children(a);
-			t = claim_text(a_nodes, t_value);
-			a_nodes.forEach(detach);
-			this.h();
-		},
-		h() {
-			attr(a, "class", "link svelte-1j000gj");
-			attr(a, "href", a_href_value = /*link*/ ctx[5].url);
-			toggle_class(a, "active", /*link*/ ctx[5].url === window.location.pathname);
-		},
-		m(target, anchor) {
-			insert_hydration(target, a, anchor);
-			append_hydration(a, t);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*site_nav*/ 2 && t_value !== (t_value = /*link*/ ctx[5].label + "")) set_data(t, t_value);
-
-			if (dirty & /*site_nav*/ 2 && a_href_value !== (a_href_value = /*link*/ ctx[5].url)) {
-				attr(a, "href", a_href_value);
-			}
-
-			if (dirty & /*site_nav, window*/ 2) {
-				toggle_class(a, "active", /*link*/ ctx[5].url === window.location.pathname);
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(a);
-		}
-	};
-}
-
-// (185:31) 
-function create_if_block_1(ctx) {
-	let img;
-	let img_src_value;
-	let img_alt_value;
-
-	return {
-		c() {
-			img = element("img");
-			this.h();
-		},
-		l(nodes) {
-			img = claim_element(nodes, "IMG", { src: true, alt: true });
-			this.h();
-		},
-		h() {
-			if (!src_url_equal(img.src, img_src_value = /*logo*/ ctx[0].image.url)) attr(img, "src", img_src_value);
-			attr(img, "alt", img_alt_value = /*logo*/ ctx[0].image.alt);
-		},
-		m(target, anchor) {
-			insert_hydration(target, img, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*logo*/ 1 && !src_url_equal(img.src, img_src_value = /*logo*/ ctx[0].image.url)) {
-				attr(img, "src", img_src_value);
-			}
-
-			if (dirty & /*logo*/ 1 && img_alt_value !== (img_alt_value = /*logo*/ ctx[0].image.alt)) {
-				attr(img, "alt", img_alt_value);
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(img);
-		}
-	};
-}
-
-// (183:6) {#if logo.title}
-function create_if_block(ctx) {
-	let t_value = /*logo*/ ctx[0].title + "";
-	let t;
-
-	return {
-		c() {
-			t = text(t_value);
-		},
-		l(nodes) {
-			t = claim_text(nodes, t_value);
-		},
-		m(target, anchor) {
-			insert_hydration(target, t, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*logo*/ 1 && t_value !== (t_value = /*logo*/ ctx[0].title + "")) set_data(t, t_value);
-		},
-		d(detaching) {
-			if (detaching) detach(t);
-		}
-	};
-}
-
 function create_fragment(ctx) {
+	let _DOCTYPE;
+	let t0;
+	let html;
+	let head;
+	let meta0;
+	let t1;
+	let meta1;
+	let t2;
+	let title;
+	let t3;
+	let t4;
+	let link;
+	let t5;
+	let body;
 	let header;
 	let div0;
 	let a0;
-	let t0;
-	let nav0;
-	let t1;
-	let div1;
-	let a1;
-	let t2;
-	let button0;
-	let t3;
-	let t4;
-	let nav1;
-	let a2;
-	let t5;
 	let t6;
-	let a3;
 	let t7;
+	let nav;
+	let a1;
 	let t8;
-	let a4;
 	let t9;
+	let a2;
 	let t10;
-	let a5;
 	let t11;
+	let a3;
 	let t12;
-	let button1;
 	let t13;
-
-	function select_block_type(ctx, dirty) {
-		if (/*logo*/ ctx[0].title) return create_if_block_2;
-		if (/*logo*/ ctx[0].image.url) return create_if_block_3;
-	}
-
-	let current_block_type = select_block_type(ctx);
-	let if_block0 = current_block_type && current_block_type(ctx);
-	let each_value = /*site_nav*/ ctx[1];
-	let each_blocks = [];
-
-	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
-	}
-
-	function select_block_type_1(ctx, dirty) {
-		if (/*logo*/ ctx[0].title) return create_if_block;
-		if (/*logo*/ ctx[0].image.url) return create_if_block_1;
-	}
-
-	let current_block_type_1 = select_block_type_1(ctx);
-	let if_block1 = current_block_type_1 && current_block_type_1(ctx);
+	let a4;
+	let t14;
+	let t15;
+	let div3;
+	let a5;
+	let t16;
+	let t17;
+	let div2;
+	let button;
+	let t18;
+	let t19;
+	let div1;
+	let a6;
+	let t20;
+	let t21;
+	let a7;
+	let t22;
+	let t23;
+	let a8;
+	let t24;
+	let t25;
+	let a9;
+	let t26;
+	let t27;
+	let script;
+	let script_src_value;
 
 	return {
 		c() {
+			_DOCTYPE = element("!DOCTYPE");
+			t0 = space();
+			html = element("html");
+			head = element("head");
+			meta0 = element("meta");
+			t1 = space();
+			meta1 = element("meta");
+			t2 = space();
+			title = element("title");
+			t3 = text("Responsive Navigation Bar");
+			t4 = space();
+			link = element("link");
+			t5 = space();
+			body = element("body");
 			header = element("header");
 			div0 = element("div");
 			a0 = element("a");
-			if (if_block0) if_block0.c();
-			t0 = space();
-			nav0 = element("nav");
-
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].c();
-			}
-
-			t1 = space();
-			div1 = element("div");
+			t6 = text("Logo");
+			t7 = space();
+			nav = element("nav");
 			a1 = element("a");
-			if (if_block1) if_block1.c();
-			t2 = space();
-			button0 = element("button");
-			t3 = text("☰");
-			t4 = space();
-			nav1 = element("nav");
+			t8 = text("Home");
+			t9 = space();
 			a2 = element("a");
-			t5 = text("Home");
-			t6 = space();
+			t10 = text("About");
+			t11 = space();
 			a3 = element("a");
-			t7 = text("About");
-			t8 = space();
+			t12 = text("Services");
+			t13 = space();
 			a4 = element("a");
-			t9 = text("Services");
-			t10 = space();
+			t14 = text("Contact");
+			t15 = space();
+			div3 = element("div");
 			a5 = element("a");
-			t11 = text("Contact");
-			t12 = space();
-			button1 = element("button");
-			t13 = text("×");
+			t16 = text("Logo");
+			t17 = space();
+			div2 = element("div");
+			button = element("button");
+			t18 = text("☰");
+			t19 = space();
+			div1 = element("div");
+			a6 = element("a");
+			t20 = text("Home");
+			t21 = space();
+			a7 = element("a");
+			t22 = text("About");
+			t23 = space();
+			a8 = element("a");
+			t24 = text("Services");
+			t25 = space();
+			a9 = element("a");
+			t26 = text("Contact");
+			t27 = space();
+			script = element("script");
 			this.h();
 		},
 		l(nodes) {
-			header = claim_element(nodes, "HEADER", { class: true });
+			_DOCTYPE = claim_element(nodes, "!DOCTYPE", { html: true });
+			t0 = claim_space(nodes);
+			html = claim_element(nodes, "HTML", { lang: true });
+			var html_nodes = children(html);
+			head = claim_element(html_nodes, "HEAD", {});
+			var head_nodes = children(head);
+			meta0 = claim_element(head_nodes, "META", { charset: true });
+			t1 = claim_space(head_nodes);
+			meta1 = claim_element(head_nodes, "META", { name: true, content: true });
+			t2 = claim_space(head_nodes);
+			title = claim_element(head_nodes, "TITLE", {});
+			var title_nodes = children(title);
+			t3 = claim_text(title_nodes, "Responsive Navigation Bar");
+			title_nodes.forEach(detach);
+			t4 = claim_space(head_nodes);
+			link = claim_element(head_nodes, "LINK", { rel: true, href: true });
+			head_nodes.forEach(detach);
+			t5 = claim_space(html_nodes);
+			body = claim_element(html_nodes, "BODY", { class: true });
+			var body_nodes = children(body);
+			header = claim_element(body_nodes, "HEADER", { class: true });
 			var header_nodes = children(header);
 			div0 = claim_element(header_nodes, "DIV", { class: true });
 			var div0_nodes = children(div0);
 			a0 = claim_element(div0_nodes, "A", { href: true, class: true });
 			var a0_nodes = children(a0);
-			if (if_block0) if_block0.l(a0_nodes);
+			t6 = claim_text(a0_nodes, "Logo");
 			a0_nodes.forEach(detach);
-			t0 = claim_space(div0_nodes);
-			nav0 = claim_element(div0_nodes, "NAV", { class: true });
-			var nav0_nodes = children(nav0);
-
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].l(nav0_nodes);
-			}
-
-			nav0_nodes.forEach(detach);
-			div0_nodes.forEach(detach);
-			t1 = claim_space(header_nodes);
-			div1 = claim_element(header_nodes, "DIV", { class: true });
-			var div1_nodes = children(div1);
-			a1 = claim_element(div1_nodes, "A", { href: true, class: true });
+			t7 = claim_space(div0_nodes);
+			nav = claim_element(div0_nodes, "NAV", { class: true });
+			var nav_nodes = children(nav);
+			a1 = claim_element(nav_nodes, "A", { href: true, class: true });
 			var a1_nodes = children(a1);
-			if (if_block1) if_block1.l(a1_nodes);
+			t8 = claim_text(a1_nodes, "Home");
 			a1_nodes.forEach(detach);
-			t2 = claim_space(div1_nodes);
-
-			button0 = claim_element(div1_nodes, "BUTTON", {
-				id: true,
-				"aria-label": true,
-				class: true
-			});
-
-			var button0_nodes = children(button0);
-			t3 = claim_text(button0_nodes, "☰");
-			button0_nodes.forEach(detach);
-			t4 = claim_space(div1_nodes);
-			nav1 = claim_element(div1_nodes, "NAV", { id: true, class: true });
-			var nav1_nodes = children(nav1);
-			a2 = claim_element(nav1_nodes, "A", { href: true, class: true });
+			t9 = claim_space(nav_nodes);
+			a2 = claim_element(nav_nodes, "A", { href: true, class: true });
 			var a2_nodes = children(a2);
-			t5 = claim_text(a2_nodes, "Home");
+			t10 = claim_text(a2_nodes, "About");
 			a2_nodes.forEach(detach);
-			t6 = claim_space(nav1_nodes);
-			a3 = claim_element(nav1_nodes, "A", { href: true, class: true });
+			t11 = claim_space(nav_nodes);
+			a3 = claim_element(nav_nodes, "A", { href: true, class: true });
 			var a3_nodes = children(a3);
-			t7 = claim_text(a3_nodes, "About");
+			t12 = claim_text(a3_nodes, "Services");
 			a3_nodes.forEach(detach);
-			t8 = claim_space(nav1_nodes);
-			a4 = claim_element(nav1_nodes, "A", { href: true, class: true });
+			t13 = claim_space(nav_nodes);
+			a4 = claim_element(nav_nodes, "A", { href: true, class: true });
 			var a4_nodes = children(a4);
-			t9 = claim_text(a4_nodes, "Services");
+			t14 = claim_text(a4_nodes, "Contact");
 			a4_nodes.forEach(detach);
-			t10 = claim_space(nav1_nodes);
-			a5 = claim_element(nav1_nodes, "A", { href: true, class: true });
+			nav_nodes.forEach(detach);
+			div0_nodes.forEach(detach);
+			t15 = claim_space(header_nodes);
+			div3 = claim_element(header_nodes, "DIV", { class: true });
+			var div3_nodes = children(div3);
+			a5 = claim_element(div3_nodes, "A", { href: true, class: true });
 			var a5_nodes = children(a5);
-			t11 = claim_text(a5_nodes, "Contact");
+			t16 = claim_text(a5_nodes, "Logo");
 			a5_nodes.forEach(detach);
-			t12 = claim_space(nav1_nodes);
-
-			button1 = claim_element(nav1_nodes, "BUTTON", {
-				id: true,
-				"aria-label": true,
-				class: true
-			});
-
-			var button1_nodes = children(button1);
-			t13 = claim_text(button1_nodes, "×");
-			button1_nodes.forEach(detach);
-			nav1_nodes.forEach(detach);
+			t17 = claim_space(div3_nodes);
+			div2 = claim_element(div3_nodes, "DIV", { class: true });
+			var div2_nodes = children(div2);
+			button = claim_element(div2_nodes, "BUTTON", { class: true });
+			var button_nodes = children(button);
+			t18 = claim_text(button_nodes, "☰");
+			button_nodes.forEach(detach);
+			t19 = claim_space(div2_nodes);
+			div1 = claim_element(div2_nodes, "DIV", { class: true });
+			var div1_nodes = children(div1);
+			a6 = claim_element(div1_nodes, "A", { href: true, class: true });
+			var a6_nodes = children(a6);
+			t20 = claim_text(a6_nodes, "Home");
+			a6_nodes.forEach(detach);
+			t21 = claim_space(div1_nodes);
+			a7 = claim_element(div1_nodes, "A", { href: true, class: true });
+			var a7_nodes = children(a7);
+			t22 = claim_text(a7_nodes, "About");
+			a7_nodes.forEach(detach);
+			t23 = claim_space(div1_nodes);
+			a8 = claim_element(div1_nodes, "A", { href: true, class: true });
+			var a8_nodes = children(a8);
+			t24 = claim_text(a8_nodes, "Services");
+			a8_nodes.forEach(detach);
+			t25 = claim_space(div1_nodes);
+			a9 = claim_element(div1_nodes, "A", { href: true, class: true });
+			var a9_nodes = children(a9);
+			t26 = claim_text(a9_nodes, "Contact");
+			a9_nodes.forEach(detach);
 			div1_nodes.forEach(detach);
+			div2_nodes.forEach(detach);
+			div3_nodes.forEach(detach);
 			header_nodes.forEach(detach);
+			t27 = claim_space(body_nodes);
+			script = claim_element(body_nodes, "SCRIPT", { src: true });
+			var script_nodes = children(script);
+			script_nodes.forEach(detach);
+			body_nodes.forEach(detach);
+			html_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
+			attr(_DOCTYPE, "html", "");
+			attr(meta0, "charset", "UTF-8");
+			attr(meta1, "name", "viewport");
+			attr(meta1, "content", "width=device-width, initial-scale=1.0");
+			attr(link, "rel", "stylesheet");
+			attr(link, "href", "styles.css");
 			attr(a0, "href", "/");
-			attr(a0, "class", "logo svelte-1j000gj");
-			attr(nav0, "class", "svelte-1j000gj");
-			attr(div0, "class", "desktop-nav svelte-1j000gj");
-			attr(a1, "href", "/");
-			attr(a1, "class", "logo svelte-1j000gj");
-			attr(button0, "id", "open");
-			attr(button0, "aria-label", "Open mobile navigation");
-			attr(button0, "class", "svelte-1j000gj");
+			attr(a0, "class", "logo svelte-2mo3x3");
+			attr(a1, "href", "/ab");
+			attr(a1, "class", "link svelte-2mo3x3");
 			attr(a2, "href", "/ab");
-			attr(a2, "class", "mobile-link svelte-1j000gj");
+			attr(a2, "class", "link svelte-2mo3x3");
 			attr(a3, "href", "/ab");
-			attr(a3, "class", "mobile-link svelte-1j000gj");
+			attr(a3, "class", "link svelte-2mo3x3");
 			attr(a4, "href", "/ab");
-			attr(a4, "class", "mobile-link svelte-1j000gj");
-			attr(a5, "href", "/ab");
-			attr(a5, "class", "mobile-link svelte-1j000gj");
-			attr(button1, "id", "close");
-			attr(button1, "aria-label", "Close Navigation");
-			attr(button1, "class", "svelte-1j000gj");
-			attr(nav1, "id", "popup");
-			attr(nav1, "class", "svelte-1j000gj");
-			attr(div1, "class", "mobile-nav svelte-1j000gj");
-			attr(header, "class", "section-container svelte-1j000gj");
+			attr(a4, "class", "link svelte-2mo3x3");
+			attr(nav, "class", "svelte-2mo3x3");
+			attr(div0, "class", "desktop-nav svelte-2mo3x3");
+			attr(a5, "href", "/");
+			attr(a5, "class", "logo svelte-2mo3x3");
+			attr(button, "class", "dropbtn svelte-2mo3x3");
+			attr(a6, "href", "/ab");
+			attr(a6, "class", "mobile-link svelte-2mo3x3");
+			attr(a7, "href", "/ab");
+			attr(a7, "class", "mobile-link svelte-2mo3x3");
+			attr(a8, "href", "/ab");
+			attr(a8, "class", "mobile-link svelte-2mo3x3");
+			attr(a9, "href", "/ab");
+			attr(a9, "class", "mobile-link svelte-2mo3x3");
+			attr(div1, "class", "dropdown-content svelte-2mo3x3");
+			attr(div2, "class", "dropdown svelte-2mo3x3");
+			attr(div3, "class", "mobile-nav svelte-2mo3x3");
+			attr(header, "class", "section-container svelte-2mo3x3");
+			if (!src_url_equal(script.src, script_src_value = "script.js")) attr(script, "src", script_src_value);
+			attr(body, "class", "svelte-2mo3x3");
+			attr(html, "lang", "en");
 		},
 		m(target, anchor) {
-			insert_hydration(target, header, anchor);
+			insert_hydration(target, _DOCTYPE, anchor);
+			insert_hydration(target, t0, anchor);
+			insert_hydration(target, html, anchor);
+			append_hydration(html, head);
+			append_hydration(head, meta0);
+			append_hydration(head, t1);
+			append_hydration(head, meta1);
+			append_hydration(head, t2);
+			append_hydration(head, title);
+			append_hydration(title, t3);
+			append_hydration(head, t4);
+			append_hydration(head, link);
+			append_hydration(html, t5);
+			append_hydration(html, body);
+			append_hydration(body, header);
 			append_hydration(header, div0);
 			append_hydration(div0, a0);
-			if (if_block0) if_block0.m(a0, null);
-			append_hydration(div0, t0);
-			append_hydration(div0, nav0);
-
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				if (each_blocks[i]) {
-					each_blocks[i].m(nav0, null);
-				}
-			}
-
-			append_hydration(header, t1);
-			append_hydration(header, div1);
-			append_hydration(div1, a1);
-			if (if_block1) if_block1.m(a1, null);
-			append_hydration(div1, t2);
-			append_hydration(div1, button0);
-			append_hydration(button0, t3);
-			append_hydration(div1, t4);
-			append_hydration(div1, nav1);
-			append_hydration(nav1, a2);
-			append_hydration(a2, t5);
-			append_hydration(nav1, t6);
-			append_hydration(nav1, a3);
-			append_hydration(a3, t7);
-			append_hydration(nav1, t8);
-			append_hydration(nav1, a4);
-			append_hydration(a4, t9);
-			append_hydration(nav1, t10);
-			append_hydration(nav1, a5);
-			append_hydration(a5, t11);
-			append_hydration(nav1, t12);
-			append_hydration(nav1, button1);
-			append_hydration(button1, t13);
+			append_hydration(a0, t6);
+			append_hydration(div0, t7);
+			append_hydration(div0, nav);
+			append_hydration(nav, a1);
+			append_hydration(a1, t8);
+			append_hydration(nav, t9);
+			append_hydration(nav, a2);
+			append_hydration(a2, t10);
+			append_hydration(nav, t11);
+			append_hydration(nav, a3);
+			append_hydration(a3, t12);
+			append_hydration(nav, t13);
+			append_hydration(nav, a4);
+			append_hydration(a4, t14);
+			append_hydration(header, t15);
+			append_hydration(header, div3);
+			append_hydration(div3, a5);
+			append_hydration(a5, t16);
+			append_hydration(div3, t17);
+			append_hydration(div3, div2);
+			append_hydration(div2, button);
+			append_hydration(button, t18);
+			append_hydration(div2, t19);
+			append_hydration(div2, div1);
+			append_hydration(div1, a6);
+			append_hydration(a6, t20);
+			append_hydration(div1, t21);
+			append_hydration(div1, a7);
+			append_hydration(a7, t22);
+			append_hydration(div1, t23);
+			append_hydration(div1, a8);
+			append_hydration(a8, t24);
+			append_hydration(div1, t25);
+			append_hydration(div1, a9);
+			append_hydration(a9, t26);
+			append_hydration(body, t27);
+			append_hydration(body, script);
 		},
-		p(ctx, [dirty]) {
-			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block0) {
-				if_block0.p(ctx, dirty);
-			} else {
-				if (if_block0) if_block0.d(1);
-				if_block0 = current_block_type && current_block_type(ctx);
-
-				if (if_block0) {
-					if_block0.c();
-					if_block0.m(a0, null);
-				}
-			}
-
-			if (dirty & /*site_nav, window*/ 2) {
-				each_value = /*site_nav*/ ctx[1];
-				let i;
-
-				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context(ctx, each_value, i);
-
-					if (each_blocks[i]) {
-						each_blocks[i].p(child_ctx, dirty);
-					} else {
-						each_blocks[i] = create_each_block(child_ctx);
-						each_blocks[i].c();
-						each_blocks[i].m(nav0, null);
-					}
-				}
-
-				for (; i < each_blocks.length; i += 1) {
-					each_blocks[i].d(1);
-				}
-
-				each_blocks.length = each_value.length;
-			}
-
-			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx)) && if_block1) {
-				if_block1.p(ctx, dirty);
-			} else {
-				if (if_block1) if_block1.d(1);
-				if_block1 = current_block_type_1 && current_block_type_1(ctx);
-
-				if (if_block1) {
-					if_block1.c();
-					if_block1.m(a1, null);
-				}
-			}
-		},
+		p: noop,
 		i: noop,
 		o: noop,
 		d(detaching) {
-			if (detaching) detach(header);
-
-			if (if_block0) {
-				if_block0.d();
-			}
-
-			destroy_each(each_blocks, detaching);
-
-			if (if_block1) {
-				if_block1.d();
-			}
+			if (detaching) detach(_DOCTYPE);
+			if (detaching) detach(t0);
+			if (detaching) detach(html);
 		}
 	};
 }
@@ -1741,32 +853,40 @@ function instance($$self, $$props, $$invalidate) {
 	let { site_nav } = $$props;
 
 	document.addEventListener("DOMContentLoaded", function () {
-		const openButton = document.getElementById("open");
-		const closeButton = document.getElementById("close");
-		const popup = document.getElementById("popup");
+		const dropbtn = document.querySelector('.dropbtn');
+		const dropdownContent = document.querySelector('.dropdown-content');
 
-		openButton.addEventListener("click", function () {
-			popup.style.display = "block";
+		dropbtn.addEventListener('click', function () {
+			dropdownContent.classList.toggle('show');
 		});
 
-		closeButton.addEventListener("click", function () {
-			popup.style.display = "none";
-		});
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function (event) {
+			if (!event.target.matches('.dropbtn')) {
+				const dropdowns = document.querySelectorAll('.dropdown-content');
+
+				dropdowns.forEach(function (dropdown) {
+					if (dropdown.classList.contains('show')) {
+						dropdown.classList.remove('show');
+					}
+				});
+			}
+		};
 	});
 
 	$$self.$$set = $$props => {
-		if ('props' in $$props) $$invalidate(2, props = $$props.props);
-		if ('logo' in $$props) $$invalidate(0, logo = $$props.logo);
-		if ('site_nav' in $$props) $$invalidate(1, site_nav = $$props.site_nav);
+		if ('props' in $$props) $$invalidate(0, props = $$props.props);
+		if ('logo' in $$props) $$invalidate(1, logo = $$props.logo);
+		if ('site_nav' in $$props) $$invalidate(2, site_nav = $$props.site_nav);
 	};
 
-	return [logo, site_nav, props];
+	return [props, logo, site_nav];
 }
 
 class Component extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { props: 2, logo: 0, site_nav: 1 });
+		init(this, options, instance, create_fragment, safe_not_equal, { props: 0, logo: 1, site_nav: 2 });
 	}
 }
 
