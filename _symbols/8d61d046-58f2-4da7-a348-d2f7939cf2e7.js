@@ -556,7 +556,7 @@ function create_if_block(ctx) {
 		},
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[0].url);
-			attr(a, "class", "button svelte-1b46w3b");
+			attr(a, "class", "button svelte-7f6a7w");
 		},
 		m(target, anchor) {
 			insert_hydration(target, a, anchor);
@@ -638,15 +638,15 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "headline svelte-1b46w3b");
-			attr(div0, "class", "subheading svelte-1b46w3b");
-			attr(div1, "class", "body svelte-1b46w3b");
+			attr(h1, "class", "headline svelte-7f6a7w");
+			attr(div0, "class", "subheading svelte-7f6a7w");
+			attr(div1, "class", "body svelte-7f6a7w");
 			if (!src_url_equal(img.src, img_src_value = /*image*/ ctx[1].url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*image*/ ctx[1].alt);
-			attr(img, "class", "svelte-1b46w3b");
-			attr(figure, "class", "svelte-1b46w3b");
-			attr(div2, "class", "section-container svelte-1b46w3b");
-			attr(section, "class", "svelte-1b46w3b");
+			attr(img, "class", "svelte-7f6a7w");
+			attr(figure, "class", "svelte-7f6a7w");
+			attr(div2, "class", "section-container svelte-7f6a7w");
+			attr(section, "class", "svelte-7f6a7w");
 			toggle_class(section, "image-left", /*variation*/ ctx[3] === "image_left");
 		},
 		m(target, anchor) {
