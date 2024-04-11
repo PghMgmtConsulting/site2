@@ -1272,7 +1272,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (91:6) {#each social as { label, link }}
+// (92:6) {#each social as { label, link }}
 function create_each_block_1(ctx) {
 	let div;
 	let span;
@@ -1313,10 +1313,10 @@ function create_each_block_1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span, "class", "label svelte-clvupk");
+			attr(span, "class", "label svelte-1o3810y");
 			attr(a, "href", a_href_value = /*link*/ ctx[9].url);
-			attr(a, "class", "svelte-clvupk");
-			attr(div, "class", "item svelte-clvupk");
+			attr(a, "class", "svelte-1o3810y");
+			attr(div, "class", "item svelte-1o3810y");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -1341,7 +1341,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (108:6) {:else}
+// (109:6) {:else}
 function create_else_block(ctx) {
 	let label;
 	let span;
@@ -1380,11 +1380,11 @@ function create_else_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span, "class", "svelte-clvupk");
+			attr(span, "class", "svelte-1o3810y");
 			attr(input, "type", input_type_value = /*input*/ ctx[5].type || "text");
 			attr(input, "placeholder", input_placeholder_value = /*input*/ ctx[5].placeholder);
-			attr(input, "class", "svelte-clvupk");
-			attr(label, "class", "svelte-clvupk");
+			attr(input, "class", "svelte-1o3810y");
+			attr(label, "class", "svelte-1o3810y");
 		},
 		m(target, anchor) {
 			insert_hydration(target, label, anchor);
@@ -1410,7 +1410,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (103:6) {#if input.type === "textarea"}
+// (104:6) {#if input.type === "textarea"}
 function create_if_block(ctx) {
 	let label;
 	let span;
@@ -1443,10 +1443,10 @@ function create_if_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span, "class", "svelte-clvupk");
+			attr(span, "class", "svelte-1o3810y");
 			attr(textarea, "placeholder", textarea_placeholder_value = /*input*/ ctx[5].placeholder);
-			attr(textarea, "class", "svelte-clvupk");
-			attr(label, "class", "svelte-clvupk");
+			attr(textarea, "class", "svelte-1o3810y");
+			attr(label, "class", "svelte-1o3810y");
 		},
 		m(target, anchor) {
 			insert_hydration(target, label, anchor);
@@ -1468,7 +1468,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (102:4) {#each inputs as input, i}
+// (103:4) {#each inputs as input, i}
 function create_each_block(ctx) {
 	let if_block_anchor;
 
@@ -1611,12 +1611,12 @@ function create_fragment(ctx) {
 		h() {
 			attr(h2, "class", "heading");
 			attr(div0, "class", "description");
-			attr(div1, "class", "social-links svelte-clvupk");
-			attr(div2, "class", "body svelte-clvupk");
-			attr(button, "class", "button svelte-clvupk");
+			attr(div1, "class", "social-links svelte-1o3810y");
+			attr(div2, "class", "body svelte-1o3810y");
+			attr(button, "class", "button svelte-1o3810y");
 			attr(button, "type", "submit");
-			attr(form, "class", "svelte-clvupk");
-			attr(section, "class", "section-container svelte-clvupk");
+			attr(form, "class", "svelte-1o3810y");
+			attr(section, "class", "section-container svelte-1o3810y");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
