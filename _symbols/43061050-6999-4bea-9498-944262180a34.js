@@ -1,4 +1,4 @@
-// Hero 4 (copy) - Updated February 15, 2024
+// Hero 4 (copy) - Updated April 11, 2024
 function noop() { }
 function run(fn) {
     return fn();
@@ -556,7 +556,7 @@ function create_if_block(ctx) {
 		},
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[0].url);
-			attr(a, "class", "button svelte-phd9an");
+			attr(a, "class", "button svelte-1uozatu");
 		},
 		m(target, anchor) {
 			insert_hydration(target, a, anchor);
@@ -638,15 +638,15 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "headline svelte-phd9an");
-			attr(div0, "class", "subheading svelte-phd9an");
-			attr(div1, "class", "body svelte-phd9an");
+			attr(h1, "class", "headline svelte-1uozatu");
+			attr(div0, "class", "subheading svelte-1uozatu");
+			attr(div1, "class", "body svelte-1uozatu");
 			if (!src_url_equal(img.src, img_src_value = /*image*/ ctx[1].url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*image*/ ctx[1].alt);
-			attr(img, "class", "svelte-phd9an");
-			attr(figure, "class", "svelte-phd9an");
-			attr(div2, "class", "section-container svelte-phd9an");
-			attr(section, "class", "svelte-phd9an");
+			attr(img, "class", "svelte-1uozatu");
+			attr(figure, "class", "svelte-1uozatu");
+			attr(div2, "class", "section-container svelte-1uozatu");
+			attr(section, "class", "svelte-1uozatu");
 			toggle_class(section, "image-left", /*variation*/ ctx[3] === "image_left");
 		},
 		m(target, anchor) {

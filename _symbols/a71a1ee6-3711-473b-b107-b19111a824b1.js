@@ -1,4 +1,4 @@
-// Box - Updated February 15, 2024
+// Box - Updated April 11, 2024
 function noop() { }
 function assign(tar, src) {
     // @ts-ignore
@@ -2850,7 +2850,7 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "class", "button svelte-d35elz");
+			attr(a, "class", "button svelte-yq43k6");
 			attr(a, "href", a_href_value = /*button*/ ctx[4].link.url);
 		},
 		m(target, anchor) {
@@ -2954,11 +2954,11 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading svelte-d35elz");
-			attr(div0, "class", "body svelte-d35elz");
-			attr(div1, "class", "buttons svelte-d35elz");
-			attr(div2, "class", "card svelte-d35elz");
-			attr(section, "class", "section-container svelte-d35elz");
+			attr(h2, "class", "heading svelte-yq43k6");
+			attr(div0, "class", "body svelte-yq43k6");
+			attr(div1, "class", "buttons svelte-yq43k6");
+			attr(div2, "class", "card svelte-yq43k6");
+			attr(section, "class", "section-container svelte-yq43k6");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
