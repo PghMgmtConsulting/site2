@@ -1,4 +1,4 @@
-// Site Footer 1 - Updated April 11, 2024
+// Site Footer 1 - Updated April 13, 2024
 function noop() { }
 function assign(tar, src) {
     // @ts-ignore
@@ -2808,7 +2808,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (73:4) {#each social as { link, icon }}
+// (109:4) {#each social as { link, icon }}
 function create_each_block(ctx) {
 	let a;
 	let icon;
@@ -2841,7 +2841,7 @@ function create_each_block(ctx) {
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[3].url);
 			attr(a, "aria-label", a_aria_label_value = /*link*/ ctx[3].label);
-			attr(a, "class", "svelte-10ivuv");
+			attr(a, "class", "svelte-1632la6");
 		},
 		m(target, anchor) {
 			insert_hydration(target, a, anchor);
@@ -2950,8 +2950,8 @@ function create_fragment(ctx) {
 		},
 		h() {
 			attr(h2, "class", "address");
-			attr(div2, "class", "social-links svelte-10ivuv");
-			attr(footer, "class", "section-container svelte-10ivuv");
+			attr(div2, "class", "social-links svelte-1632la6");
+			attr(footer, "class", "section-container svelte-1632la6");
 		},
 		m(target, anchor) {
 			insert_hydration(target, footer, anchor);
