@@ -1,4 +1,4 @@
-// Hero with form - Updated April 13, 2024
+// Hero with form - Updated April 30, 2024
 function noop() { }
 const identity = x => x;
 function assign(tar, src) {
@@ -3061,7 +3061,7 @@ function create_if_block_5(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "message error svelte-5ujfmr");
+			attr(div, "class", "message error svelte-9qjpqq");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -3106,7 +3106,7 @@ function create_if_block_4(ctx) {
 			this.h();
 		},
 		h() {
-			attr(div, "class", "message svelte-5ujfmr");
+			attr(div, "class", "message svelte-9qjpqq");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -3191,11 +3191,11 @@ function create_if_block_2(ctx) {
 			attr(input, "name", "email");
 			attr(input, "type", "text");
 			attr(input, "placeholder", input_placeholder_value = /*form*/ ctx[0].placeholder);
-			attr(input, "class", "svelte-5ujfmr");
-			attr(label, "class", "svelte-5ujfmr");
-			attr(button, "class", "button svelte-5ujfmr");
+			attr(input, "class", "svelte-9qjpqq");
+			attr(label, "class", "svelte-9qjpqq");
+			attr(button, "class", "button svelte-9qjpqq");
 			attr(button, "type", "submit");
-			attr(form_1, "class", "svelte-5ujfmr");
+			attr(form_1, "class", "svelte-9qjpqq");
 		},
 		m(target, anchor) {
 			insert_hydration(target, form_1, anchor);
@@ -3335,7 +3335,7 @@ function create_if_block_1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(img, "class", "graphic left svelte-5ujfmr");
+			attr(img, "class", "graphic left svelte-9qjpqq");
 			if (!src_url_equal(img.src, img_src_value = /*graphics*/ ctx[2].left.url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*graphics*/ ctx[2].left.alt);
 		},
@@ -3373,7 +3373,7 @@ function create_if_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(img, "class", "graphic right svelte-5ujfmr");
+			attr(img, "class", "graphic right svelte-9qjpqq");
 			if (!src_url_equal(img.src, img_src_value = /*graphics*/ ctx[2].right.url)) attr(img, "src", img_src_value);
 			attr(img, "alt", img_alt_value = /*graphics*/ ctx[2].right.alt);
 		},
@@ -3452,8 +3452,8 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h1, "class", "headline svelte-5ujfmr");
-			attr(section, "class", "section-container svelte-5ujfmr");
+			attr(h1, "class", "headline svelte-9qjpqq");
+			attr(section, "class", "section-container svelte-9qjpqq");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
