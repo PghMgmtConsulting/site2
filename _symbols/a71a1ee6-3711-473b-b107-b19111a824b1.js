@@ -2813,7 +2813,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (50:6) {#each buttons as button}
+// (52:6) {#each buttons as button}
 function create_each_block(ctx) {
 	let a;
 	let icon;
@@ -2850,7 +2850,7 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(a, "class", "button svelte-yq43k6");
+			attr(a, "class", "button svelte-1nzxlj2");
 			attr(a, "href", a_href_value = /*button*/ ctx[4].link.url);
 		},
 		m(target, anchor) {
@@ -2954,11 +2954,11 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading svelte-yq43k6");
-			attr(div0, "class", "body svelte-yq43k6");
-			attr(div1, "class", "buttons svelte-yq43k6");
-			attr(div2, "class", "card svelte-yq43k6");
-			attr(section, "class", "section-container svelte-yq43k6");
+			attr(h2, "class", "heading svelte-1nzxlj2");
+			attr(div0, "class", "body svelte-1nzxlj2");
+			attr(div1, "class", "buttons svelte-1nzxlj2");
+			attr(div2, "class", "card svelte-1nzxlj2");
+			attr(section, "class", "section-container svelte-1nzxlj2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
