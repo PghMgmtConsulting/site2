@@ -2828,7 +2828,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (87:6) {#if person.image.url}
+// (90:6) {#if person.image.url}
 function create_if_block(ctx) {
 	let figure;
 	let img;
@@ -2844,15 +2844,15 @@ function create_if_block(ctx) {
 		l(nodes) {
 			figure = claim_element(nodes, "FIGURE", { class: true });
 			var figure_nodes = children(figure);
-			img = claim_element(figure_nodes, "IMG", { alt: true, src: true, class: true });
+			img = claim_element(figure_nodes, "IMG", { class: true, alt: true, src: true });
 			figure_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
+			attr(img, "class", "img svelte-c10ybs");
 			attr(img, "alt", img_alt_value = /*person*/ ctx[3].image.alt);
 			if (!src_url_equal(img.src, img_src_value = /*person*/ ctx[3].image.url)) attr(img, "src", img_src_value);
-			attr(img, "class", "svelte-bdo148");
-			attr(figure, "class", "svelte-bdo148");
+			attr(figure, "class", "svelte-c10ybs");
 		},
 		m(target, anchor) {
 			insert_hydration(target, figure, anchor);
@@ -2873,7 +2873,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (98:10) {#each person.social_links as {link, icon}}
+// (101:10) {#each person.social_links as {link, icon}}
 function create_each_block_1(ctx) {
 	let a;
 	let icon;
@@ -2906,7 +2906,7 @@ function create_each_block_1(ctx) {
 		h() {
 			attr(a, "href", a_href_value = /*link*/ ctx[6].url);
 			attr(a, "aria-label", a_aria_label_value = /*link*/ ctx[6].label);
-			attr(a, "class", "svelte-bdo148");
+			attr(a, "class", "svelte-c10ybs");
 		},
 		m(target, anchor) {
 			insert_hydration(target, a, anchor);
@@ -2943,7 +2943,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (85:4) {#each people as person}
+// (88:4) {#each people as person}
 function create_each_block(ctx) {
 	let li;
 	let t0;
@@ -3028,12 +3028,12 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span0, "class", "name svelte-bdo148");
-			attr(span1, "class", "title svelte-bdo148");
-			attr(div0, "class", "details svelte-bdo148");
-			attr(div1, "class", "social svelte-bdo148");
+			attr(span0, "class", "name svelte-c10ybs");
+			attr(span1, "class", "title svelte-c10ybs");
+			attr(div0, "class", "details svelte-c10ybs");
+			attr(div1, "class", "social svelte-c10ybs");
 			attr(div2, "class", "info");
-			attr(li, "class", "svelte-bdo148");
+			attr(li, "class", "svelte-c10ybs");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -3180,9 +3180,9 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading svelte-bdo148");
-			attr(ul, "class", "cards svelte-bdo148");
-			attr(section, "class", "section-container svelte-bdo148");
+			attr(h2, "class", "heading svelte-c10ybs");
+			attr(ul, "class", "cards svelte-c10ybs");
+			attr(section, "class", "section-container svelte-c10ybs");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
