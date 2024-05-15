@@ -1,4 +1,4 @@
-// Pricing Table 1 - Updated May 14, 2024
+// Pricing Table 1 - Updated May 15, 2024
 function noop() { }
 function assign(tar, src) {
     // @ts-ignore
@@ -2822,7 +2822,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (105:10) {#each tier.features as { item, icon }
+// (106:10) {#each tier.features as { item, icon }
 function create_each_block_1(ctx) {
 	let li;
 	let span0;
@@ -2863,8 +2863,8 @@ function create_each_block_1(ctx) {
 			this.h();
 		},
 		h() {
-			attr(span0, "class", "icon svelte-eigrhe");
-			attr(li, "class", "svelte-eigrhe");
+			attr(span0, "class", "icon svelte-g3fwo9");
+			attr(li, "class", "svelte-g3fwo9");
 		},
 		m(target, anchor) {
 			insert_hydration(target, li, anchor);
@@ -2898,7 +2898,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (114:8) {#if tier.link.label}
+// (115:8) {#if tier.link.label}
 function create_if_block(ctx) {
 	let a;
 	let t_value = /*tier*/ ctx[4].link.label + "";
@@ -2920,7 +2920,7 @@ function create_if_block(ctx) {
 		},
 		h() {
 			attr(a, "href", a_href_value = /*tier*/ ctx[4].link.url);
-			attr(a, "class", "button svelte-eigrhe");
+			attr(a, "class", "button svelte-g3fwo9");
 		},
 		m(target, anchor) {
 			insert_hydration(target, a, anchor);
@@ -2939,7 +2939,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (93:4) {#each tiers as tier, tier_index}
+// (94:4) {#each tiers as tier, tier_index}
 function create_each_block(ctx) {
 	let div1;
 	let header;
@@ -3052,15 +3052,15 @@ function create_each_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h3, "class", "title svelte-eigrhe");
-			attr(span0, "class", "numerator svelte-eigrhe");
-			attr(span1, "class", "denominator svelte-eigrhe");
-			attr(div0, "class", "price svelte-eigrhe");
+			attr(h3, "class", "title svelte-g3fwo9");
+			attr(span0, "class", "numerator svelte-g3fwo9");
+			attr(span1, "class", "denominator svelte-g3fwo9");
+			attr(div0, "class", "price svelte-g3fwo9");
 			attr(span2, "class", "description");
-			attr(header, "class", "svelte-eigrhe");
-			attr(hr, "class", "svelte-eigrhe");
-			attr(ul, "class", "features svelte-eigrhe");
-			attr(div1, "class", "tier svelte-eigrhe");
+			attr(header, "class", "svelte-g3fwo9");
+			attr(hr, "class", "svelte-g3fwo9");
+			attr(ul, "class", "features svelte-g3fwo9");
+			attr(div1, "class", "tier svelte-g3fwo9");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div1, anchor);
@@ -3227,10 +3227,10 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h2, "class", "heading svelte-eigrhe");
-			attr(h3, "class", "subheading svelte-eigrhe");
-			attr(div, "class", "tiers svelte-eigrhe");
-			attr(section, "class", "section-container svelte-eigrhe");
+			attr(h2, "class", "heading svelte-g3fwo9");
+			attr(h3, "class", "subheading svelte-g3fwo9");
+			attr(div, "class", "tiers svelte-g3fwo9");
+			attr(section, "class", "section-container svelte-g3fwo9");
 		},
 		m(target, anchor) {
 			insert_hydration(target, section, anchor);
